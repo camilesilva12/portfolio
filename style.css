@@ -1,17 +1,19 @@
-/* Paleta: Azul escuro e azul claro */
+/* Paleta de cores: Azul escuro e azul claro */
 
+/* Reset básico para margens, padding e box-sizing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Estilo do corpo da página */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #bbdefb; /* Azul claro */
 }
 
-/* NAVBAR */
+/* Estilo da navbar */
 .navbar {
   background-color: #0d47a1; /* Azul escuro */
   color: white;
@@ -19,24 +21,27 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Permite quebrar linhas em telas menores */
 }
 
+/* Estilo da logo */
 .logo img {
   width: 60px;
   border-radius: 8px;
+  /* Animação de aparecimento */
   animation: fadeIn 1s ease forwards;
   opacity: 0;
   animation-delay: 0.1s;
 }
 
-/* Menu de navegação */
+/* Estilo do menu de navegação */
 .menu {
   list-style: none;
   display: flex;
   gap: 20px;
 }
 
+/* Links do menu */
 .menu li a {
   text-decoration: none;
   color: white;
@@ -44,38 +49,43 @@ body {
   transition: color 0.3s;
 }
 
+/* Efeito hover nos links */
 .menu li a:hover {
   color: #90caf9; /* Azul claro no hover */
 }
 
+/* Animação dos itens do menu */
 .menu li {
   animation: fadeIn 1s ease forwards;
   opacity: 0;
 }
 
+/* Delays diferentes para cada item do menu */
 .menu li:nth-child(1) { animation-delay: 0.2s; }
 .menu li:nth-child(2) { animation-delay: 0.4s; }
 .menu li:nth-child(3) { animation-delay: 0.6s; }
 
-/* Barra de busca */
+/* Estilo da barra de busca */
 .search-bar input {
   padding: 5px 10px;
   border: none;
   border-radius: 4px;
+  /* Animação de aparecimento */
   animation: fadeIn 1s ease forwards;
   opacity: 0;
   animation-delay: 0.8s;
 }
 
-/* Conteúdo principal */
+/* Estilo do conteúdo principal */
 .content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 80px); /* Altura total da tela menos a navbar */
   text-align: center;
 }
 
+/* Estilo da imagem "EM BREVE!" */
 .content img {
   max-width: 40%;
   border-radius: 12px;
@@ -85,7 +95,7 @@ body {
   box-shadow: 0 0 20px rgba(13, 71, 161, 0.4);
 }
 
-/* Animações */
+/* Animação de fadeIn para os elementos */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -97,6 +107,7 @@ body {
   }
 }
 
+/* Animação de pulsação na borda da imagem */
 @keyframes borda-pulso {
   0% {
     box-shadow: 0 0 10px rgba(13, 71, 161, 0.4);
@@ -109,7 +120,7 @@ body {
   }
 }
 
-/* Responsividade */
+/* Estilos para telas menores (responsividade) */
 @media (max-width: 768px) {
   .menu {
     flex-direction: column;
@@ -130,3 +141,7 @@ body {
     max-width: 80%;
   }
 }
+
+ 
+
+ 
