@@ -1,40 +1,165 @@
-/* Estilo para seções principais */
-section {
-  padding: 60px 20px;
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-section h2, section h1 {
-  margin-bottom: 20px;
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #bbdefb;
   color: #0d47a1;
-}
-
-section p, section li {
-  font-size: 18px;
-  color: #0d47a1;
-}
-
-/* Cards dos projetos */
-.card-projeto {
-  background-color: white;
-  color: #0d47a1;
-  border: 1px solid #0d47a1;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-projeto:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(13, 71, 161, 0.3);
-}
-
-.card-projeto a {
+a {
   color: #0d47a1;
-  font-weight: bold;
   text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
 }
-
-.card-projeto a:hover {
+a:hover,
+a:focus {
+  color: #064d9f;
+  outline: none;
   text-decoration: underline;
 }
+
+/* Container principal */
+main.content {
+  max-width: 900px;
+  width: 100%;
+}
+
+/* Seções com espaçamento consistente */
+section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* Títulos */
+h1, h2, h3 {
+  color: #0d47a1;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.8rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+/* Sobre mim */
+.sobre-mim p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.15rem;
+  color: #0a3a85;
+}
+
+/* Projetos - grid flexível */
+.grid-projetos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.card-projeto {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #0d47a1;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(13, 71, 161, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card-projeto:hover,
+.card-projeto:focus-within {
+  box-shadow: 0 8px 20px rgba(13, 71, 161, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Contato */
+.contato ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #0a3a85;
+}
+
+.contato ul li {
+  margin-bottom: 10px;
+}
+
+/* Navbar - simples */
+header.navbar {
+  background-color: #0d47a1;
+  width: 100%;
+  padding: 15px 0;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Logo */
+.logo img {
+  width: 60px;
+  border-radius: 8px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Menu de navegação */
+nav.main-nav ul.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav.main-nav ul.menu li a {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+nav.main-nav ul.menu li a:hover,
+nav.main-nav ul.menu li a:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  outline: none;
+}
+
+/* Barra de busca */
+.search-ba
