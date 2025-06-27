@@ -86,6 +86,7 @@ body {
   text-align: center;
 }
 
+/* Imagem "EM BREVE!" */
 .content img {
   max-width: 40%;
   border-radius: 12px;
@@ -124,85 +125,6 @@ body {
   }
 }
 
-/* Estilo para seções (Projetos, Sobre, Contato) */
-section {
-  padding: 60px 20px;
-  background-color: #e3f2fd;
-  color: #0d47a1;
-  text-align: center;
-}
-
-section h2 {
-  margin-bottom: 25px;
-  font-size: 28px;
-  text-transform: uppercase;
-  position: relative;
-}
-
-section h2::after {
-  content: "";
-  width: 60px;
-  height: 3px;
-  background-color: #0d47a1;
-  display: block;
-  margin: 10px auto 0;
-  border-radius: 2px;
-}
-
-/* Projetos */
-.projeto {
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.projeto h3 {
-  margin-bottom: 10px;
-}
-
-.projeto a {
-  display: inline-block;
-  margin-top: 10px;
-  color: #0d47a1;
-  text-decoration: none;
-  font-weight: bold;
-  border: 1px solid #0d47a1;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: all 0.3s;
-}
-
-.projeto a:hover {
-  background-color: #0d47a1;
-  color: white;
-}
-
-/* Contato */
-#contato ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 15px;
-}
-
-#contato ul li a {
-  color: #0d47a1;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-#contato ul li a:hover {
-  color: #1565c0;
-}
-
 /* Responsividade */
 @media (max-width: 768px) {
   .navbar {
@@ -235,17 +157,4 @@ section h2::after {
   .content img {
     max-width: 90%;
   }
-
-  .projeto {
-    margin: 20px 10px;
-  }
-
-  #contato ul {
-    flex-direction: column;
-    gap: 10px;
-  }
 }
-
-    
-
- 
