@@ -2,38 +2,44 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Camile Silva | Portfólio</title>
+
+  <!-- Fonte moderna do Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
   <!-- Link para o arquivo CSS externo -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Descrição para SEO -->
+  <meta name="description" content="Portfólio de Camile Silva. Veja projetos, saiba mais sobre mim e entre em contato.">
 </head>
 <body>
   <!-- Navbar principal -->
-  <nav class="navbar">
-    <!-- Logo do site -->
+  <header class="navbar" role="banner">
+    <!-- Logo -->
     <div class="logo">
-      <img src="https://us.123rf.com/450wm/wikagraphic/wikagraphic2010/wikagraphic201033105/157994145-letra-inicial-cs-logotipo-nome-da-empresa-c%C3%ADrculo-azul-e-swoosh-design-logotipo-do-vetor-para-identi.jpg" alt="Logo Camile Silva">
+      <img src="https://us.123rf.com/450wm/wikagraphic/wikagraphic2010/wikagraphic201033105/157994145-letra-inicial-cs-logotipo-nome-da-empresa-c%C3%ADrculo-azul-e-swoosh-design-logotipo-do-vetor-para-identi.jpg" alt="Logo com as iniciais CS - Camile Silva">
     </div>
-    
+
     <!-- Menu de navegação -->
-    <ul class="menu">
-      <li><a href="#projetos">Projetos</a></li>
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#contato">Contato</a></li>
-    </ul>
-    
+    <nav aria-label="Menu principal">
+      <ul class="menu">
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
     <!-- Barra de busca -->
     <div class="search-bar">
-      <input type="text" placeholder="Buscar...">
+      <input type="search" placeholder="Buscar..." aria-label="Buscar no site">
     </div>
-  </nav>
+  </header>
 
-  <!-- Conteúdo principal da página -->
-  <main class="content">
-    <!-- Imagem com a frase "EM BREVE!" -->
-    <img src="https://cdn.textstudio.com/output/sample/normal/9/3/8/8/em-breve-logo-275-8839.png" alt="Em breve">
+  <!-- Conteúdo principal -->
+  <main class="content" role="main">
+    <img src="https://cdn.textstudio.com/output/sample/normal/9/3/8/8/em-breve-logo-275-8839.png" alt="Imagem com a frase 'Em Breve!'">
   </main>
 </body>
 </html>
-
-
