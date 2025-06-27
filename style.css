@@ -157,7 +157,51 @@ body {
   .content img {
     max-width: 90%;
   }
+} 
+section {
+  padding: 40px 20px;
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  text-align: center;
 }
+
+section h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.projeto {
+  margin-bottom: 30px;
+}
+
+.projeto a {
+  color: #0d47a1;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.projeto a:hover {
+  color: #1565c0;
+}
+
+#contato ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+#contato ul li a {
+  color: #0d47a1;
+  text-decoration: none;
+}
+
+#contato ul li a:hover {
+  color: #1565c0;
+}
+
 
 
 
