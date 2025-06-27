@@ -1,91 +1,92 @@
-/* Paleta de cores: Azul escuro e azul claro */
+/* Paleta: Azul escuro (#0d47a1) e azul claro (#bbdefb) */
 
-/* Reset básico para margens, padding e box-sizing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Estilo do corpo da página */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #bbdefb; /* Azul claro */
+  font-family: 'Poppins', sans-serif;
+  background-color: #bbdefb;
+  color: #0d47a1;
 }
 
-/* Estilo da navbar */
+/* Navbar */
 .navbar {
-  background-color: #0d47a1; /* Azul escuro */
+  background-color: #0d47a1;
   color: white;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  flex-wrap: wrap; /* Permite quebrar linhas em telas menores */
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 15px 20px;
+  gap: 10px;
 }
 
-/* Estilo da logo */
+/* Logo */
 .logo img {
   width: 60px;
   border-radius: 8px;
-  /* Animação de aparecimento */
   animation: fadeIn 1s ease forwards;
   opacity: 0;
   animation-delay: 0.1s;
 }
 
-/* Estilo do menu de navegação */
+/* Menu */
 .menu {
   list-style: none;
   display: flex;
   gap: 20px;
 }
 
-/* Links do menu */
-.menu li a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-/* Efeito hover nos links */
-.menu li a:hover {
-  color: #90caf9; /* Azul claro no hover */
-}
-
-/* Animação dos itens do menu */
 .menu li {
   animation: fadeIn 1s ease forwards;
   opacity: 0;
 }
 
-/* Delays diferentes para cada item do menu */
 .menu li:nth-child(1) { animation-delay: 0.2s; }
 .menu li:nth-child(2) { animation-delay: 0.4s; }
 .menu li:nth-child(3) { animation-delay: 0.6s; }
 
-/* Estilo da barra de busca */
+.menu li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.menu li a:hover,
+.menu li a:focus {
+  color: #64b5f6;
+  background-color: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+/* Barra de busca */
 .search-bar input {
-  padding: 5px 10px;
+  padding: 6px 12px;
   border: none;
   border-radius: 4px;
-  /* Animação de aparecimento */
   animation: fadeIn 1s ease forwards;
   opacity: 0;
   animation-delay: 0.8s;
+  max-width: 250px;
 }
 
-/* Estilo do conteúdo principal */
+/* Conteúdo principal */
 .content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 80px); /* Altura total da tela menos a navbar */
+  min-height: calc(100vh - 100px);
+  padding: 20px;
   text-align: center;
 }
 
-/* Estilo da imagem "EM BREVE!" */
+/* Imagem "EM BREVE!" */
 .content img {
   max-width: 40%;
   border-radius: 12px;
@@ -93,9 +94,14 @@ body {
   padding: 10px;
   animation: borda-pulso 2s infinite;
   box-shadow: 0 0 20px rgba(13, 71, 161, 0.4);
+  transition: transform 0.3s ease;
 }
 
-/* Animação de fadeIn para os elementos */
+.content img:hover {
+  transform: scale(1.02);
+}
+
+/* Animações */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -107,7 +113,6 @@ body {
   }
 }
 
-/* Animação de pulsação na borda da imagem */
 @keyframes borda-pulso {
   0% {
     box-shadow: 0 0 10px rgba(13, 71, 161, 0.4);
@@ -120,28 +125,42 @@ body {
   }
 }
 
-/* Estilos para telas menores (responsividade) */
+/* Responsividade */
 @media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
   .menu {
     flex-direction: column;
+    align-items: center;
     width: 100%;
-    margin-top: 10px;
+  }
+
+  .menu li {
+    margin: 5px 0;
   }
 
   .search-bar {
-    margin-top: 10px;
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .search-bar input {
-    width: 100%;
+    width: 90%;
+    max-width: 300px;
   }
 
   .content img {
-    max-width: 80%;
+    max-width: 90%;
   }
 }
 
- 
+
+
+    
 
  
