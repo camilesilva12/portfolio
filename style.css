@@ -1,110 +1,71 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f0f4f8;
+  background: #f9f9f9;
   color: #333;
-  line-height: 1.6;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
 }
 
-/* Navbar */
-.navbar {
-  background-color: #0d47a1;
+header.navbar {
+  background: #3b82f6;
   color: white;
-  padding: 15px 20px;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
+  justify-content: space-between;
 }
 
-.logo img {
-  width: 60px;
-  border-radius: 8px;
-}
-
-/* Menu */
-.menu {
-  list-style: none;
-  display: flex;
-  gap: 20px;
+.menu li {
+  display: inline-block;
+  margin-left: 1.5rem;
 }
 
 .menu li a {
   color: white;
   text-decoration: none;
-  font-weight: bold;
-  padding: 6px 10px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+  font-weight: 600;
 }
 
-.menu li a:hover,
-.menu li a:focus {
-  background-color: rgba(255, 255, 255, 0.2);
+.menu li a:hover {
+  text-decoration: underline;
 }
 
-/* Barra de busca */
-.search-bar input {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  max-width: 250px;
-  width: 100%;
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-/* Conteúdo principal */
 .content {
-  max-width: 900px;
-  margin: 40px auto;
-}
-
-/* Sessões */
-section {
-  margin-bottom: 60px;
-  text-align: center;
-}
-
-.sobre-mim h1 {
-  margin-bottom: 15px;
+  padding: 2rem;
 }
 
 .sobre-mim p {
+  font-size: 1.2rem;
   max-width: 700px;
-  margin: 0 auto;
-  font-size: 18px;
-  color: #444;
+  margin: 0 auto 3rem auto;
+  text-align: center;
+  line-height: 1.6;
 }
 
-/* Projetos */
+.projetos h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #8b5cf6;
+}
+
 .grid-projetos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
 .card-projeto {
-  background-color: white;
-  border: 1px solid #ddd;
-  padding: 20px;
-  width: 300px;
+  background: white;
+  padding: 1.5rem;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s ease;
 }
 
 .card-projeto:hover {
@@ -112,65 +73,49 @@ section {
 }
 
 .card-projeto h3 {
-  margin-bottom: 10px;
+  margin-bottom: 0.8rem;
+  color: #3b82f6;
+}
+
+.card-projeto p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
 }
 
 .card-projeto a {
   display: inline-block;
-  margin-top: 10px;
+  padding: 0.5rem 1rem;
+  background: #8b5cf6;
+  color: white;
   text-decoration: none;
-  color: #0d47a1;
-  font-weight: bold;
+  border-radius: 5px;
+  font-weight: 600;
 }
 
 .card-projeto a:hover {
-  text-decoration: underline;
+  background: #7c3aed;
 }
 
-/* Contato */
-.contato ul {
-  list-style: none;
-  padding: 0;
-  color: #444;
+.contato {
+  text-align: center;
+  margin-top: 3rem;
 }
 
-.contato ul li {
-  margin-bottom: 10px;
-}
-
-.contato ul li a {
-  color: #0d47a1;
+.contato a {
+  color: #3b82f6;
   text-decoration: none;
+  font-weight: 600;
 }
 
-.contato ul li a:hover {
+.contato a:hover {
   text-decoration: underline;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .menu {
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-  }
-
-  .search-bar {
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .grid-projetos {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card-projeto {
-    width: 90%;
-  }
+.search-bar input {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  width: 200px;
 }
