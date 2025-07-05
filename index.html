@@ -275,8 +275,19 @@
     <section id="contato" class="contato">
       <h2>Entre em Contato</h2>
       <p>Você pode me encontrar em: <a href="mailto:camiledaconceicaosilva38@gmail.com">camiledaconceicaosilva38@gmail.com</a></p>
-      <button class="btn-voltar" onclick="history.back()">Voltar</button>
+      <button class="btn-voltar" id="btnVoltar">Voltar</button>
     </section>
   </main>
+
+  <script>
+    document.getElementById('btnVoltar').addEventListener('click', function() {
+      if (document.referrer) {
+        history.back();
+      } else {
+        window.location.href = '#sobre';
+      }
+    });
+  </script>
 </body>
 </html>
+
