@@ -185,6 +185,27 @@
       color: #bb86fc;
     }
 
+    /* Estilo do botão voltar */
+    .btn-voltar {
+      background-color: #64ffda;
+      color: #121212;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 1rem auto 0;
+      max-width: 150px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-voltar:hover {
+      background-color: #4cd3b1;
+    }
+
     @media (max-width: 600px) {
       header.navbar {
         flex-direction: column;
@@ -253,7 +274,8 @@
 
     <section id="contato" class="contato">
       <h2>Entre em Contato</h2>
-      <p>Você pode me encontrar em:</p>
+      <p>Você pode me encontrar em: <a href="mailto:camiledaconceicaosilva38@gmail.com">camiledaconceicaosilva38@gmail.com</a></p>
+      <button class="btn-voltar" onclick="history.back()">Voltar</button>
     </section>
   </main>
 </body>
