@@ -1,4 +1,4 @@
-/* Fonte e reset básico */
+/* Fundo animado com gradiente */
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
@@ -9,7 +9,6 @@ body {
   animation: animarFundo 15s ease infinite;
 }
 
-/* Animação de fundo */
 @keyframes animarFundo {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -200,6 +199,27 @@ section.contato h2 {
 
 .contato a:hover {
   text-decoration: underline;
+}
+
+/* Botão voltar */
+.btn-voltar {
+  background-color: #64ffda;
+  color: #121212;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 1rem auto 0;
+  max-width: 150px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-voltar:hover {
+  background-color: #4cd3b1;
 }
 
 /* Responsividade */
