@@ -1,3 +1,4 @@
+/* Reset e base */
 * {
   margin: 0;
   padding: 0;
@@ -6,11 +7,12 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #f0f8ff;
-  color: #333;
+  background: #e6f0fa;
+  color: #1e3a8a;
   line-height: 1.6;
 }
 
+/* Cabeçalho */
 header.navbar {
   background-color: #1e3a8a;
   color: white;
@@ -27,9 +29,8 @@ header.navbar {
   max-width: 1200px;
 }
 
-.logo img {
-  height: 50px;
-  border-radius: 50%;
+.logo h1 {
+  font-size: 1.5rem;
 }
 
 .menu {
@@ -46,27 +47,38 @@ header.navbar {
 }
 
 .menu a:hover {
-  color: #93c5fd;
+  color: #a5d8ff;
 }
 
 .search-bar input {
   padding: 0.5rem;
   border: none;
   border-radius: 4px;
+  background-color: #dbeafe;
+  color: #1e3a8a;
 }
 
+/* Conteúdo principal */
 main.content {
   padding: 2rem 10%;
+  animation: fadeIn 1s ease-in;
 }
 
+/* Sobre mim */
 .sobre-mim p {
-  background: white;
+  background: #dbeafe;
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   font-size: 1.1rem;
+  transition: transform 0.3s;
 }
 
+.sobre-mim p:hover {
+  transform: scale(1.01);
+}
+
+/* Projetos */
 .projetos h2,
 .contato h2 {
   margin: 2rem 0 1rem;
@@ -80,29 +92,35 @@ main.content {
 }
 
 .card-projeto {
-  background: white;
+  background: #bfdbfe;
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: transform 0.3s;
+  transition: all 0.3s ease;
 }
 
 .card-projeto:hover {
-  transform: scale(1.03);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 .card-projeto h3 {
-  color: #2563eb;
+  color: #1d4ed8;
 }
 
 .card-projeto a {
   display: inline-block;
   margin-top: 0.5rem;
-  color: #2563eb;
+  color: #1d4ed8;
   font-weight: bold;
   text-decoration: none;
 }
 
+.card-projeto a:hover {
+  text-decoration: underline;
+}
+
+/* Contato */
 .contato p,
 .contato a {
   font-size: 1rem;
@@ -113,15 +131,17 @@ main.content {
   display: inline-block;
   margin-top: 1rem;
   padding: 0.6rem 1.2rem;
-  background: #2563eb;
-  color: white;
+  background: #1d4ed8;
+  color: #ffffff;
   text-decoration: none;
   border-radius: 6px;
-  transition: background 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
+  font-weight: bold;
 }
 
 .btn-voltar:hover {
-  background: #1d4ed8;
+  background: #1e40af;
+  box-shadow: 0 0 10px #1e3a8a70;
 }
 
 /* Responsivo */
@@ -138,3 +158,14 @@ main.content {
   }
 }
 
+/* Animação de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
