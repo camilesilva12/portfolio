@@ -1,10 +1,19 @@
 /* Fonte e reset básico */
 body {
   font-family: 'Poppins', sans-serif;
-  background: #121212;
-  color: #e0e0e0;
   margin: 0;
   padding: 0;
+  color: #e0e0e0;
+  background: linear-gradient(-45deg, #1f1b24, #2c2c54, #1d3557, #3f3d56);
+  background-size: 400% 400%;
+  animation: animarFundo 15s ease infinite;
+}
+
+/* Animação de fundo */
+@keyframes animarFundo {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Container centralizado */
@@ -216,4 +225,3 @@ section.contato h2 {
     width: 90%;
   }
 }
-
