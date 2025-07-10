@@ -12,12 +12,17 @@
   <meta name="description" content="Portfólio de Camile Silva. Veja projetos, saiba mais sobre mim e entre em contato." />
 
   <style>
+    /* Estilos base */
     body {
       font-family: 'Poppins', sans-serif;
       background: #121212;
       color: #e0e0e0;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     .container {
@@ -95,6 +100,18 @@
       padding: 2rem 2.5rem;
       margin: 2rem auto;
       max-width: 900px;
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     section.sobre-mim p {
@@ -111,6 +128,17 @@
       margin-bottom: 2rem;
     }
 
+    section.projetos h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      margin: 0.5rem auto 0;
+      background: linear-gradient(to right, #64ffda, #bb86fc);
+      border-radius: 3px;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
     .grid-projetos {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -124,6 +152,7 @@
       box-shadow: 0 4px 12px rgba(100, 255, 218, 0.15);
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 0.8s ease-out both;
     }
 
     .card-projeto:hover {
@@ -151,10 +180,12 @@
       border-radius: 5px;
       font-weight: 600;
       transition: background-color 0.3s ease;
+      box-shadow: 0 0 8px rgba(187, 134, 252, 0.5);
     }
 
     .card-projeto a:hover {
       background: #9f6cfb;
+      box-shadow: 0 0 12px rgba(187, 134, 252, 0.8);
     }
 
     .contato p {
@@ -185,7 +216,6 @@
       color: #bb86fc;
     }
 
-    /* Estilo do botão voltar */
     .btn-voltar {
       background-color: #64ffda;
       color: #121212;
@@ -200,10 +230,12 @@
       max-width: 150px;
       text-align: center;
       text-decoration: none;
+      box-shadow: 0 0 8px rgba(187, 134, 252, 0.5);
     }
 
     .btn-voltar:hover {
       background-color: #4cd3b1;
+      box-shadow: 0 0 12px rgba(187, 134, 252, 0.8);
     }
 
     @media (max-width: 600px) {
@@ -254,10 +286,7 @@
   <main class="content" role="main">
     <section id="sobre" class="sobre-mim">
       <p>
-        Olá! Sou Camile da Conceição Silva.<br>
-        Apaixonada por criatividade, tecnologia e aprendizado constante, gosto de transformar ideias em projetos reais que informam, envolvem e inspiram.
-        <br><br>
-        Trabalho com dedicação para unir inovação e propósito em tudo o que faço. Acredito que boas ideias só ganham valor quando saem do papel e se tornam experiências que impactam pessoas. Por isso, estou sempre explorando novas ferramentas, aprendendo com cada desafio e buscando evoluir profissional e pessoalmente.
+        <!-- Texto será animado via JavaScript -->
       </p>
     </section>
 
@@ -280,14 +309,34 @@
   </main>
 
   <script>
-    document.getElementById('btnVoltar').addEventListener('click', function() {
+    // Botão voltar
+    document.getElementById('btnVoltar').addEventListener('click', function () {
       if (document.referrer) {
         history.back();
       } else {
         window.location.href = '#sobre';
       }
     });
+
+    // Efeito de digitação
+    const texto = "Olá! Sou Camile da Conceição Silva.";
+    const p = document.querySelector('.sobre-mim p');
+    const restoTexto = `Apaixonada por criatividade, tecnologia e aprendizado constante, gosto de transformar ideias em projetos reais que informam, envolvem e inspiram.<br><br>
+      Trabalho com dedicação para unir inovação e propósito em tudo o que faço. Acredito que boas ideias só ganham valor quando saem do papel e se tornam experiências que impactam pessoas. Por isso, estou sempre explorando novas ferramentas, aprendendo com cada desafio e buscando evoluir profissional e pessoalmente.`;
+
+    let i = 0;
+
+    function digitar() {
+      if (i < texto.length) {
+        p.innerHTML = texto.substring(0, i + 1) + '<span style="border-right: 2px solid #64ffda; padding-left: 2px"></span>';
+        i++;
+        setTimeout(digitar, 50);
+      } else {
+        p.innerHTML = texto + "<br><br>" + restoTexto;
+      }
+    }
+
+    window.addEventListener("load", digitar);
   </script>
 </body>
 </html>
-
