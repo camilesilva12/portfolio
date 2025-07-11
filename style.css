@@ -1,4 +1,4 @@
-/* 1. Variáveis CSS */
+ /* 1. Variáveis CSS */
 :root {
     --cor-fundo-principal: #0f172a; /* Dark Blue */
     --cor-fundo-secundario: rgba(15, 23, 42, 0.7); /* Dark Blue semi-transparente para cards */
@@ -13,10 +13,16 @@
     --spacing-medium: 30px;
     --spacing-small: 15px;
     --altura-header: 80px; /* Altura do seu cabeçalho */
+
+    /* Variáveis adicionadas para acessibilidade/consistência */
+    --focus-outline-color: var(--cor-link-hover);
+    --transition-speed: 0.3s;
 }
 
 /* 2. Reset Básico e Estilos Globais */
-* {
+*,
+*::before,
+*::after { /* Inclui pseudo-elements no box-sizing */
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -35,42 +41,56 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     position: relative;
-    overflow-x: hidden;
-    z-index: 0;
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+    z-index: 0; /* Garante que o conteúdo esteja acima dos pseudo-elementos de fundo */
 }
 
 @keyframes gradientShift {
-    0% {background-position:0% 50%;}
-    50% {background-position:100% 50%;}
-    100% {background-position:0% 50%;}
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Classe para conteúdo visível apenas para leitores de tela (SR-Only) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 /* 3. Efeitos de Fundo (pseudo-elementos) */
-body::before {
+body::before,
+body::after {
     content: "";
     position: fixed;
+    border-radius: 50%;
+    filter: blur(70px); /* Ajustado para um valor base, individualizado abaixo */
+    z-index: -1; /* Garante que fiquem no fundo */
+}
+
+body::before {
     top: -100px;
     left: -100px;
     width: 250px;
     height: 250px;
     background: rgba(96, 165, 250, 0.15); /* Azul claro */
-    border-radius: 50%;
-    filter: blur(70px);
-    z-index: -1;
+    filter: blur(70px); /* Mantido, mas pode ser ajustado */
     animation: subtleMove1 15s ease-in-out infinite alternate;
 }
 
 body::after {
-    content: "";
-    position: fixed;
     bottom: -120px;
     right: -120px;
     width: 350px;
     height: 350px;
     background: rgba(124, 58, 237, 0.15); /* Roxo */
-    border-radius: 50%;
-    filter: blur(90px);
-    z-index: -1;
+    filter: blur(90px); /* Mantido, mas pode ser ajustado */
     animation: subtleMove2 20s ease-in-out infinite alternate-reverse;
 }
 
@@ -101,6 +121,7 @@ body::after {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    height: var(--altura-header); /* Garante altura consistente do topo */
 }
 
 .logo h1 {
@@ -112,10 +133,11 @@ body::after {
 .main-nav .menu {
     display: flex;
     list-style: none;
+    gap: 25px; /* Usando gap para espaçamento entre itens do menu */
 }
 
 .main-nav .menu li {
-    margin-left: 25px;
+    /* margin-left: 25px; REMOVIDO: substituído por gap */
 }
 
 .main-nav .menu a {
@@ -123,10 +145,11 @@ body::after {
     text-decoration: none;
     font-weight: 600;
     padding: 8px 15px;
-    transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+    transition: color var(--transition-speed) ease, background-color var(--transition-speed) ease, transform 0.2s ease;
     border-radius: 5px;
     position: relative;
     overflow: hidden; /* Para o efeito de underline */
+    outline: none; /* Remove o outline padrão para customizar */
 }
 
 .main-nav .menu a:hover,
@@ -134,6 +157,11 @@ body::after {
     color: #fff;
     background-color: rgba(124, 58, 237, 0.3);
     transform: translateY(-2px);
+}
+
+.main-nav .menu a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 2px;
 }
 
 /* Underline animado no hover/active */
@@ -147,11 +175,12 @@ body::after {
     background-color: var(--cor-link-hover);
     transform: scaleX(0);
     transform-origin: bottom right;
-    transition: transform 0.3s ease-out;
+    transition: transform var(--transition-speed) ease-out;
 }
 
 .main-nav .menu a:hover::after,
-.main-nav .menu a.active::after {
+.main-nav .menu a.active::after,
+.main-nav .menu a:focus-visible::after { /* Adicionado focus-visible */
     transform: scaleX(1);
     transform-origin: bottom left;
 }
@@ -164,6 +193,13 @@ body::after {
     cursor: pointer;
     padding: 10px;
     z-index: 101; /* Acima do menu */
+    position: relative; /* Para alinhamento de barras */
+    outline: none; /* Remove o outline padrão para customizar */
+}
+
+.hamburger-menu:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 2px;
 }
 
 .hamburger-menu .bar {
@@ -172,36 +208,34 @@ body::after {
     height: 3px;
     background-color: var(--cor-texto-principal);
     margin: 5px 0;
-    transition: all 0.3s ease-in-out;
+    transition: all var(--transition-speed) ease-in-out;
 }
 
 /* 5. Seções Comuns */
 .content {
-    padding-top: var(--spacing-medium);
+    /* padding-top: var(--spacing-medium); REMOVIDO: O espaçamento será tratado pela margin-top das seções */
 }
 
 .secao {
     padding: var(--spacing-large) var(--spacing-medium);
-    margin-bottom: 0; /* Removendo margem para padding garantir espaçamento */
-    min-height: calc(100vh - var(--altura-header)); /* Para ocupar a tela, se necessário */
+    margin-top: calc(var(--altura-header) * -1); /* Compensa a altura do cabeçalho */
+    padding-top: calc(var(--altura-header) + var(--spacing-large)); /* Adiciona o padding real da seção */
+    min-height: 100vh; /* Garante que a seção ocupe no mínimo 100% da altura da viewport */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    flex-direction: column; /* Garante que o conteúdo dentro da seção se empilhe */
+    flex-direction: column;
 }
 
 .content-wrapper {
     max-width: 960px;
     width: 100%;
     padding: var(--spacing-medium);
-    background-color: rgba(15, 23, 42, 0.5); /* Fundo semi-transparente para o wrapper de conteúdo */
+    background-color: rgba(15, 23, 42, 0.5);
     border-radius: var(--border-radius-padrao);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.center-box {
-    /* Já é um flex-direction: column por .secao e align-items: center por .content-wrapper */
+    /* margin-top: var(--spacing-medium); Adicionado se precisar de espaço acima do wrapper, mas .secao já tem padding */
 }
 
 /* 6. Estilos de Tipografia */
@@ -219,7 +253,7 @@ h2::after {
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 80px; /* Largura do underline */
+    width: 80px;
     height: 4px;
     background-color: var(--cor-destaque-roxo);
     border-radius: 2px;
@@ -240,7 +274,8 @@ p {
 a {
     color: var(--cor-link);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color var(--transition-speed) ease;
+    outline: none; /* Remove o outline padrão para customizar */
 }
 
 a:hover {
@@ -248,17 +283,18 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Seção Sobre Mim Específica: REMOVIDO .foto-perfil e .habilidades-lista */
-/* O estilo para .foto-perfil e .habilidades-lista foi removido, pois esses elementos não estão mais no HTML. */
-
+a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 2px;
+}
 
 /* 7. Componentes Específicos (Projetos, Cards) */
 .grid-projetos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajustado minmax para cards sem imagem */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-medium);
     padding: var(--spacing-medium) 0;
-    max-width: 1000px; /* Limita a largura da grade de projetos */
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -267,22 +303,20 @@ a:hover {
     border-radius: var(--border-radius-padrao);
     padding: var(--spacing-medium);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    position: relative; /* Para potencial overlay */
-    min-height: 250px; /* Adicionado para dar uma altura mínima aos cards sem imagem */
-    justify-content: space-between; /* Para espaçar o conteúdo e empurrar links para baixo */
+    position: relative;
+    min-height: 250px;
+    justify-content: space-between;
 }
 
 .card-projeto:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
-
-/* REMOVIDO: .card-projeto .imagem-projeto não é mais necessário */
 
 .card-projeto h3 {
     font-size: 1.5rem;
@@ -294,14 +328,14 @@ a:hover {
     font-size: 1rem;
     color: var(--cor-texto-secundario);
     margin-bottom: var(--spacing-medium);
-    flex-grow: 1; /* Para que os parágrafos de descrição tenham altura consistente */
+    flex-grow: 1;
 }
 
 .card-projeto .links-projeto {
-    margin-top: auto; /* Empurra os links para o final do card */
+    margin-top: auto;
     display: flex;
     gap: var(--spacing-small);
-    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -313,25 +347,31 @@ a:hover {
     border-radius: 5px;
     text-decoration: none;
     font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color var(--transition-speed) ease, transform 0.2s ease;
 }
 
 .card-projeto a:hover {
-    background-color: #6d28d9; /* Um roxo um pouco mais escuro no hover */
+    background-color: #6d28d9;
     transform: translateY(-2px);
 }
 
+.card-projeto a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 2px;
+}
+
 .card-projeto a.link-desativado {
-    background-color: #5a627a; /* Cor mais neutra para links desativados */
+    background-color: #5a627a;
     cursor: not-allowed;
     opacity: 0.7;
 }
 
-.card-projeto a.link-desativado:hover {
+.card-projeto a.link-desativado:hover,
+.card-projeto a.link-desativado:focus-visible { /* Garante que o hover/focus não altere o desativado */
     background-color: #5a627a;
     transform: none;
+    outline: none; /* Desativa outline para links desativados */
 }
-
 
 /* Seção de Contato Específica */
 .redes-sociais {
@@ -348,7 +388,7 @@ a:hover {
     border: 1px solid var(--cor-link);
     padding: 8px 15px;
     border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 
 .redes-sociais a:hover {
@@ -356,6 +396,11 @@ a:hover {
     color: #fff;
     border-color: var(--cor-link-hover);
     text-decoration: none;
+}
+
+.redes-sociais a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 2px;
 }
 
 
@@ -376,10 +421,11 @@ a:hover {
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    opacity: 0; /* Começa invisível */
+    opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
+    transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease, transform 0.2s ease;
     z-index: 1000;
+    outline: none; /* Remove o outline padrão para customizar */
 }
 
 #btn-voltar-topo.show {
@@ -392,12 +438,21 @@ a:hover {
     transform: translateY(-3px);
 }
 
+#btn-voltar-topo:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 2px;
+}
+
 /* 9. Media Queries (Responsividade) */
 @media (max-width: 768px) {
     /* Navbar e Menu */
+    .hamburger-menu {
+        display: block; /* Mostrar o hambúrguer no mobile */
+    }
+
     .main-nav {
         position: fixed;
-        top: 0; /* Ou var(--altura-header) se quiser abaixo da navbar */
+        top: 0;
         right: 0;
         width: 70%; /* Largura do menu lateral no mobile */
         height: 100%;
@@ -406,7 +461,7 @@ a:hover {
         justify-content: flex-start;
         padding-top: var(--altura-header); /* Para o conteúdo não ficar atrás do cabeçalho */
         transform: translateX(100%); /* Esconder menu para a direita */
-        transition: transform 0.3s ease-in-out;
+        transition: transform var(--transition-speed) ease-in-out;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
     }
 
@@ -418,6 +473,7 @@ a:hover {
         flex-direction: column;
         width: 100%;
         padding: 20px 0;
+        gap: 0; /* Remover gap para itens empilhados */
     }
 
     .main-nav .menu li {
@@ -435,10 +491,7 @@ a:hover {
         border-bottom: none;
     }
 
-    .hamburger-menu {
-        display: block; /* Mostrar o hambúrguer no mobile */
-    }
-
+    /* Animação do Hambúrguer */
     .hamburger-menu.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
@@ -489,5 +542,11 @@ a:hover {
 
     .card-projeto {
         padding: var(--spacing-small);
+    }
+
+    /* Ajuste para o padding das seções em telas muito pequenas */
+    .secao {
+        padding-left: var(--spacing-small);
+        padding-right: var(--spacing-small);
     }
 }
