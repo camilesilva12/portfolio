@@ -101,6 +101,44 @@ main.content {
   box-shadow: 0 6px 18px rgba(96, 165, 250, 0.3);
 }
 
+/* Centraliza e estiliza a caixa de Sobre e Contato */
+.center-box {
+  max-width: 600px;
+  margin: 3rem auto;
+  text-align: center;
+  background-color: #1e293b;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(96, 165, 250, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.center-box:hover {
+  transform: scale(1.02);
+}
+
+.center-box h2 {
+  margin-bottom: 1.5rem;
+  color: #60a5fa;
+}
+
+.center-box p {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.center-box a {
+  color: #93c5fd;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.center-box a:hover {
+  color: #bfdbfe;
+  text-decoration: underline;
+}
+
 /* Projetos */
 .grid-projetos {
   display: grid;
