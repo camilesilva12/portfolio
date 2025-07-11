@@ -1,48 +1,525 @@
-/* Fundo animado e formas difusas */
+/* 1. Variáveis CSS */
+:root {
+    --cor-fundo-principal: #0f172a; /* Dark Blue */
+    --cor-fundo-secundario: rgba(15, 23, 42, 0.7); /* Dark Blue semi-transparente para cards */
+    --cor-texto-principal: #e0e7ff; /* Light Blue/White */
+    --cor-texto-secundario: #c9d1d9; /* Lighter Grey */
+    --cor-link: #96aaff; /* Light Blue para links */
+    --cor-link-hover: #7c3aed; /* Purple para hover de links */
+    --cor-destaque-roxo: #7c3aed; /* Purple */
+    --cor-destaque-azul: #2563eb; /* Blue */
+    --border-radius-padrao: 10px;
+    --spacing-large: 60px;
+    --spacing-medium: 30px;
+    --spacing-small: 15px;
+    --altura-header: 80px;
+}
+
+/* 2. Reset Básico e Estilos Globais */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-  background: linear-gradient(270deg, #0f172a, #2563eb, #7c3aed, #0f172a);
-  background-size: 800% 800%;
-  animation: gradientShift 20s ease infinite;
-  color: #e0e7ff;
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.6;
-  min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
-  z-index: 0;
+    background: linear-gradient(270deg, var(--cor-fundo-principal), var(--cor-destaque-azul), var(--cor-destaque-roxo), var(--cor-fundo-principal));
+    background-size: 800% 800%;
+    animation: gradientShift 20s ease infinite;
+    color: var(--cor-texto-principal);
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    z-index: 0;
 }
 
 @keyframes gradientShift {
-  0% {background-position:0% 50%;}
-  50% {background-position:100% 50%;}
-  100% {background-position:0% 50%;}
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
 }
 
+/* 3. Efeitos de Fundo (pseudo-elementos) */
 body::before {
-  content: "";
-  position: fixed;
-  top: -100px;
-  left: -100px;
-  width: 250px;
-  height: 250px;
-  background: rgba(96, 165, 250, 0.15);
-  border-radius: 50%;
-  filter: blur(70px);
-  z-index: -1;
+    content: "";
+    position: fixed;
+    top: -100px;
+    left: -100px;
+    width: 250px;
+    height: 250px;
+    background: rgba(96, 165, 250, 0.15); /* Azul claro */
+    border-radius: 50%;
+    filter: blur(70px);
+    z-index: -1;
+    animation: subtleMove1 15s ease-in-out infinite alternate;
 }
 
 body::after {
-  content: "";
-  position: fixed;
-  bottom: -120px;
-  right: -120px;
-  width: 350px;
-  height: 350px;
-  background: rgba(124, 58, 237, 0.15);
-  border-radius: 50%;
-  filter: blur(90px);
-  z-index: -1;
+    content: "";
+    position: fixed;
+    bottom: -120px;
+    right: -120px;
+    width: 350px;
+    height: 350px;
+    background: rgba(124, 58, 237, 0.15); /* Roxo */
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: -1;
+    animation: subtleMove2 20s ease-in-out infinite alternate-reverse;
 }
 
-/* Cabeçalho, menu, caixas, botão, projetos... */
-[Insira aqui o restante do style.css que você já tem, com as seções: .navbar, .topo, .menu, .center-box, .grid-projetos, .card-projeto, etc. Se quiser, posso colar tudo de novo com essas partes incluídas!]
+@keyframes subtleMove1 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 30px); }
+}
+
+@keyframes subtleMove2 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-40px, -20px); }
+}
+
+/* 4. Layout Principal (Header, Main) */
+.navbar {
+    background-color: var(--cor-fundo-principal);
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.container.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo h1 {
+    font-size: 2rem;
+    color: var(--cor-destaque-roxo);
+    margin: 0;
+}
+
+.main-nav .menu {
+    display: flex;
+    list-style: none;
+}
+
+.main-nav .menu li {
+    margin-left: 25px;
+}
+
+.main-nav .menu a {
+    color: var(--cor-texto-principal);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 15px;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden; /* Para o efeito de underline */
+}
+
+.main-nav .menu a:hover,
+.main-nav .menu a.active {
+    color: #fff;
+    background-color: rgba(124, 58, 237, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Underline animado no hover/active */
+.main-nav .menu a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--cor-link-hover);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.main-nav .menu a:hover::after,
+.main-nav .menu a.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+    display: none; /* Esconder por padrão em telas maiores */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 101; /* Acima do menu */
+}
+
+.hamburger-menu .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--cor-texto-principal);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* 5. Seções Comuns */
+.content {
+    padding-top: var(--spacing-medium);
+}
+
+.secao {
+    padding: var(--spacing-large) var(--spacing-medium);
+    margin-bottom: 0; /* Removendo margem para padding garantir espaçamento */
+    min-height: calc(100vh - var(--altura-header)); /* Para ocupar a tela, se necessário */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column; /* Garante que o conteúdo dentro da seção se empilhe */
+}
+
+.content-wrapper {
+    max-width: 960px;
+    width: 100%;
+    padding: var(--spacing-medium);
+    background-color: rgba(15, 23, 42, 0.5); /* Fundo semi-transparente para o wrapper de conteúdo */
+    border-radius: var(--border-radius-padrao);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.center-box {
+    /* Já é um flex-direction: column por .secao e align-items: center por .content-wrapper */
+}
+
+/* 6. Estilos de Tipografia */
+h2 {
+    font-size: 2.5rem;
+    color: var(--cor-texto-principal);
+    margin-bottom: var(--spacing-medium);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px; /* Largura do underline */
+    height: 4px;
+    background-color: var(--cor-destaque-roxo);
+    border-radius: 2px;
+}
+
+h3 {
+    font-size: 1.8rem;
+    color: var(--cor-link);
+    margin-bottom: var(--spacing-small);
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-medium);
+    color: var(--cor-texto-secundario);
+}
+
+a {
+    color: var(--cor-link);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--cor-link-hover);
+    text-decoration: underline;
+}
+
+/* Seção Sobre Mim Específica */
+.foto-perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: var(--spacing-medium);
+    border: 4px solid var(--cor-destaque-roxo);
+    box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
+}
+
+.habilidades-lista {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--spacing-medium);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.habilidades-lista li {
+    background-color: rgba(96, 165, 250, 0.2);
+    color: var(--cor-texto-principal);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+
+/* 7. Componentes Específicos (Projetos, Cards) */
+.grid-projetos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-medium);
+    padding: var(--spacing-medium) 0;
+    max-width: 1000px; /* Limita a largura da grade de projetos */
+    margin: 0 auto;
+}
+
+.card-projeto {
+    background-color: var(--cor-fundo-secundario);
+    border-radius: var(--border-radius-padrao);
+    padding: var(--spacing-medium);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative; /* Para potencial overlay */
+}
+
+.card-projeto:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-projeto .imagem-projeto {
+    max-width: 100%;
+    height: 200px; /* Altura fixa para as imagens dos projetos */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    border-radius: 8px;
+    margin-bottom: var(--spacing-small);
+    border: 1px solid rgba(124, 58, 237, 0.5);
+}
+
+.card-projeto h3 {
+    font-size: 1.5rem;
+    color: var(--cor-link);
+    margin-bottom: var(--spacing-small);
+}
+
+.card-projeto p {
+    font-size: 1rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: var(--spacing-medium);
+    flex-grow: 1; /* Para que os parágrafos de descrição tenham altura consistente */
+}
+
+.card-projeto .links-projeto {
+    margin-top: auto; /* Empurra os links para o final do card */
+    display: flex;
+    gap: var(--spacing-small);
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+    justify-content: center;
+}
+
+.card-projeto a {
+    display: inline-block;
+    background-color: var(--cor-destaque-roxo);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.card-projeto a:hover {
+    background-color: #6d28d9; /* Um roxo um pouco mais escuro no hover */
+    transform: translateY(-2px);
+}
+
+.card-projeto a.link-desativado {
+    background-color: #5a627a; /* Cor mais neutra para links desativados */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.card-projeto a.link-desativado:hover {
+    background-color: #5a627a;
+    transform: none;
+}
+
+
+/* Seção de Contato Específica */
+.redes-sociais {
+    margin-top: var(--spacing-medium);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.redes-sociais a {
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 1px solid var(--cor-link);
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.redes-sociais a:hover {
+    background-color: var(--cor-link-hover);
+    color: #fff;
+    border-color: var(--cor-link-hover);
+    text-decoration: none;
+}
+
+
+/* 8. Botão Voltar ao Topo */
+#btn-voltar-topo {
+    position: fixed;
+    bottom: var(--spacing-medium);
+    right: var(--spacing-medium);
+    background-color: var(--cor-destaque-roxo);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0; /* Começa invisível */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
+    z-index: 1000;
+}
+
+#btn-voltar-topo.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#btn-voltar-topo:hover {
+    background-color: #6d28d9;
+    transform: translateY(-3px);
+}
+
+/* 9. Media Queries (Responsividade) */
+@media (max-width: 768px) {
+    /* Navbar e Menu */
+    .main-nav {
+        position: fixed;
+        top: 0; /* Ou var(--altura-header) se quiser abaixo da navbar */
+        right: 0;
+        width: 70%; /* Largura do menu lateral no mobile */
+        height: 100%;
+        background-color: var(--cor-fundo-principal);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: var(--altura-header); /* Para o conteúdo não ficar atrás do cabeçalho */
+        transform: translateX(100%); /* Esconder menu para a direita */
+        transition: transform 0.3s ease-in-out;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .main-nav.active { /* Classe adicionada via JS */
+        transform: translateX(0); /* Mostrar menu */
+    }
+
+    .main-nav .menu {
+        flex-direction: column;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .main-nav .menu li {
+        margin: 0;
+        text-align: center;
+    }
+
+    .main-nav .menu a {
+        display: block;
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .main-nav .menu a:last-child {
+        border-bottom: none;
+    }
+
+    .hamburger-menu {
+        display: block; /* Mostrar o hambúrguer no mobile */
+    }
+
+    .hamburger-menu.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger-menu.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger-menu.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Conteúdo geral */
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.4rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .secao {
+        padding: var(--spacing-large) var(--spacing-small); /* Menor padding lateral */
+    }
+
+    .content-wrapper {
+        padding: var(--spacing-small);
+    }
+
+    .grid-projetos {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: var(--spacing-small);
+    }
+
+    .card-projeto {
+        padding: var(--spacing-small);
+    }
+}
