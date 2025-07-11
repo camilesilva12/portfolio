@@ -1,19 +1,46 @@
 <!DOCTYPE html>
-<html lang="pt-BR" >
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Camile Silva | Portfólio</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .animated-shape {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: rgba(96, 165, 250, 0.15);
+      border-radius: 50%;
+      filter: blur(30px);
+      animation: float 6s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    .shape1 { top: 10%; left: 5%; animation-delay: 0s; }
+    .shape2 { top: 50%; right: 5%; animation-delay: 2s; }
+    .shape3 { bottom: 10%; left: 40%; animation-delay: 4s; }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
 </head>
 <body>
-  <header class="navbar" role="banner">
+  <!-- Formas animadas ao fundo -->
+  <div class="animated-shape shape1"></div>
+  <div class="animated-shape shape2"></div>
+  <div class="animated-shape shape3"></div>
+
+  <header class="navbar">
     <div class="container topo">
       <div class="logo">
         <h1>Camile Silva</h1>
       </div>
-      <nav class="main-nav" aria-label="Menu principal">
+      <nav class="main-nav">
         <ul class="menu">
           <li><a href="#sobre" class="active">Sobre</a></li>
           <li><a href="#projetos">Projetos</a></li>
@@ -23,15 +50,11 @@
     </div>
   </header>
 
-  <main class="content" role="main">
+  <main class="content">
     <section id="sobre" class="secao ativa sobre-centralizada">
       <div class="content-wrapper center-box">
         <h2>Sobre Mim</h2>
-        <p>Olá! Sou Camile da Conceição Silva, uma entusiasta da criatividade e da tecnologia. Desde cedo, descobri que transformar ideias em soluções reais é minha maior motivação. Gosto de aprender constantemente, explorando novas ferramentas e metodologias para entregar projetos que realmente fazem a diferença.
-
-Acredito que a inovação deve estar sempre aliada ao propósito, por isso me dedico a desenvolver experiências digitais que inspiram, engajam e geram impacto positivo. Seja na programação, design ou na gestão de projetos, busco aprimorar minhas habilidades e abraçar novos desafios com dedicação e entusiasmo.
-
-Fora do mundo digital, valorizo o aprendizado contínuo, a colaboração e o compartilhamento de conhecimento. Estou sempre aberta a trocar ideias, participar de projetos colaborativos e crescer junto com a comunidade.</p>
+        <p>Olá! Sou Camile da Conceição Silva, apaixonada por criatividade, tecnologia e aprendizado constante. Transformo ideias em projetos reais que inspiram e engajam.</p>
       </div>
     </section>
 
@@ -39,11 +62,11 @@ Fora do mundo digital, valorizo o aprendizado contínuo, a colaboração e o com
       <div class="content-wrapper">
         <h2>Meus Projetos</h2>
         <div class="grid-projetos">
-          <article class="card-projeto">
+          <div class="card-projeto">
             <h3>Projeto 1: Site da Rapunzel</h3>
             <p>Site dedicado ao clássico da Disney "Rapunzel", com resumo do filme, galeria de imagens e informações sobre os personagens.</p>
-            <a href="https://camilesilva12.github.io/primeirotrabalho./" target="_blank" rel="noopener noreferrer">Ver Projeto</a>
-          </article>
+            <a href="https://camilesilva12.github.io/primeirotrabalho./" target="_blank">Ver Projeto</a>
+          </div>
         </div>
       </div>
     </section>
@@ -52,7 +75,7 @@ Fora do mundo digital, valorizo o aprendizado contínuo, a colaboração e o com
       <div class="content-wrapper center-box">
         <h2>Contato</h2>
         <p>Me encontre no email: <a href="mailto:camiledaconceicaosilva38@gmail.com">camiledaconceicaosilva38@gmail.com</a></p>
-        <p>Ou pelo WhatsApp: <a href="https://wa.me/5599991724110" target="_blank" rel="noopener noreferrer">(99) 99172-4110</a></p>
+        <p>Ou pelo WhatsApp: <a href="https://wa.me/5599991724110" target="_blank">(99) 99172-4110</a></p>
       </div>
     </section>
   </main>
