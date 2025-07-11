@@ -5,13 +5,50 @@
   box-sizing: border-box;
 }
 
-/* Fonte e fundo */
+/* Fundo animado com gradiente + bolas difusas */
 body {
+  background: linear-gradient(270deg, #0f172a, #2563eb, #7c3aed, #0f172a);
+  background-size: 800% 800%;
+  animation: gradientShift 20s ease infinite;
+  color: #e0e7ff;
   font-family: 'Poppins', sans-serif;
-  background-color: #0f172a; /* fundo escuro azul marinho */
-  color: #e0e7ff; /* azul claro para texto */
   line-height: 1.6;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  z-index: 0;
+}
+
+@keyframes gradientShift {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -100px;
+  left: -100px;
+  width: 250px;
+  height: 250px;
+  background: rgba(96, 165, 250, 0.15);
+  border-radius: 50%;
+  filter: blur(70px);
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -120px;
+  right: -120px;
+  width: 350px;
+  height: 350px;
+  background: rgba(124, 58, 237, 0.15);
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: -1;
 }
 
 /* Cabeçalho */
@@ -102,7 +139,7 @@ main.content {
   align-items: center;
   height: 100vh;
   padding: 0 1rem;
-  background-color: #0f172a; /* fundo escuro */
+  background-color: transparent; /* mantém transparente pra fundo animado aparecer */
   box-sizing: border-box;
 }
 
