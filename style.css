@@ -1,19 +1,19 @@
 /* 1. Variáveis CSS */
 :root {
-    /* Cores Padrão (Dark Mode) */
-    --cor-fundo-principal: #0f172a; /* Dark Blue */
-    --cor-fundo-secundario: rgba(15, 23, 42, 0.7); /* Dark Blue semi-transparente para cards */
-    --cor-texto-principal: #e0e7ff; /* Light Blue/White */
-    --cor-texto-secundario: #c9d1d9; /* Lighter Grey */
-    --cor-link: #96aaff; /* Light Blue para links */
-    --cor-link-hover: #7c3aed; /* Purple para hover de links */
-    --cor-destaque-roxo: #7c3aed; /* Purple */
-    --cor-destaque-azul: #2563eb; /* Blue */
+    /* Cores Padrão (Dark Mode Sutil/Colorido) */
+    --cor-fundo-principal: #1a202c; /* Azul escuro quase preto */
+    --cor-fundo-secundario: rgba(26, 32, 44, 0.85); /* Dark Blue semi-transparente para cards */
+    --cor-texto-principal: #e2e8f0; /* Cinza claro */
+    --cor-texto-secundario: #a0aec0; /* Cinza médio */
+    --cor-link: #63b3ed; /* Azul claro para links */
+    --cor-link-hover: #4299e1; /* Azul mais vibrante para hover de links */
+    --cor-destaque-roxo: #805ad5; /* Roxo suave */
+    --cor-destaque-azul: #4299e1; /* Azul suave */
 
     /* Variáveis adicionadas para acessibilidade/consistência */
     --focus-outline-color: var(--cor-link-hover);
-    --transition-speed: 0.3s;
-    --altura-header: 80px; /* Altura do seu cabeçalho */
+    --transition-speed: 0.5s; /* Aumentado para transições mais suaves */
+    --altura-header: 80px;
     --border-radius-padrao: 10px;
     --spacing-large: 60px;
     --spacing-medium: 30px;
@@ -22,32 +22,15 @@
 
 /* Cores para o Light Mode (sobrescrevem as padrões quando a classe .light-mode está ativa) */
 body.light-mode {
-    --cor-fundo-principal: #f0f4f8; /* Light Gray/Blue */
-    --cor-fundo-secundario: rgba(255, 255, 255, 0.8); /* White semi-transparente para cards */
-    --cor-texto-principal: #2d3748; /* Dark Gray */
-    --cor-texto-secundario: #4a5568; /* Medium Gray */
-    --cor-link: #4299e1; /* Bright Blue para links */
-    --cor-link-hover: #3182ce; /* Darker Blue para hover */
-    --cor-destaque-roxo: #667eea; /* Medium Blue/Purple */
-    --cor-destaque-azul: #3182ce; /* Blue */
-    
-    /* Ajuste de gradiente de fundo para light mode */
-    background: linear-gradient(270deg, var(--cor-fundo-principal), #e2e8f0, #cbd5e0, var(--cor-fundo-principal));
-    background-size: 800% 800%;
-    animation: gradientShift 20s ease infinite;
+    --cor-fundo-principal: #f7fafc; /* Branco suave */
+    --cor-fundo-secundario: rgba(255, 255, 255, 0.9); /* Branco transparente para cards */
+    --cor-texto-principal: #2d3748; /* Cinza escuro */
+    --cor-texto-secundario: #4a5568; /* Cinza médio escuro */
+    --cor-link: #3182ce; /* Azul vibrante para links */
+    --cor-link-hover: #2b6cb0; /* Azul mais escuro para hover */
+    --cor-destaque-roxo: #667eea; /* Azul arroxeado */
+    --cor-destaque-azul: #4299e1; /* Azul médio */
 }
-
-/* Ajuste de efeito de fundo para light mode */
-body.light-mode::before {
-    background: rgba(96, 165, 250, 0.1); /* Azul claro mais sutil */
-    filter: blur(50px);
-}
-
-body.light-mode::after {
-    background: rgba(102, 126, 234, 0.1); /* Roxo mais sutil */
-    filter: blur(60px);
-}
-
 
 /* 2. Reset Básico e Estilos Globais */
 *,
@@ -63,9 +46,10 @@ html {
 }
 
 body {
+    /* Fundo com gradiente animado para ambos os temas */
     background: linear-gradient(270deg, var(--cor-fundo-principal), var(--cor-destaque-azul), var(--cor-destaque-roxo), var(--cor-fundo-principal));
     background-size: 800% 800%;
-    animation: gradientShift 20s ease infinite;
+    animation: gradientShift 20s ease infinite; /* Mantenha a animação */
     color: var(--cor-texto-principal);
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
@@ -73,7 +57,9 @@ body {
     position: relative;
     overflow-x: hidden;
     z-index: 0;
-    transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave para mudança de tema */
+    /* Transições suaves para todas as propriedades de cor e fundo relevantes */
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease,
+                background var(--transition-speed) ease; /* Adicione 'background' para o gradiente */
 }
 
 @keyframes gradientShift {
@@ -102,7 +88,7 @@ body::after {
     border-radius: 50%;
     filter: blur(70px);
     z-index: -1;
-    transition: background 0.5s ease, filter 0.5s ease; /* Transição para efeitos de fundo */
+    transition: background var(--transition-speed) ease, filter var(--transition-speed) ease;
 }
 
 body::before {
@@ -110,7 +96,7 @@ body::before {
     left: -100px;
     width: 250px;
     height: 250px;
-    background: rgba(96, 165, 250, 0.15);
+    background: rgba(99, 179, 237, 0.15); /* Cor ajustada para Light/Dark */
     filter: blur(70px);
     animation: subtleMove1 15s ease-in-out infinite alternate;
 }
@@ -120,7 +106,7 @@ body::after {
     right: -120px;
     width: 350px;
     height: 350px;
-    background: rgba(124, 58, 237, 0.15);
+    background: rgba(128, 90, 213, 0.15); /* Cor ajustada para Light/Dark */
     filter: blur(90px);
     animation: subtleMove2 20s ease-in-out infinite alternate-reverse;
 }
@@ -143,7 +129,7 @@ body::after {
     position: sticky;
     top: 0;
     z-index: 100;
-    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Transição para navbar */
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
 .container.topo {
@@ -160,16 +146,14 @@ body::after {
     font-size: 2rem;
     color: var(--cor-destaque-roxo);
     margin: 0;
-    transition: color 0.5s ease; /* Transição para logo */
+    transition: color var(--transition-speed) ease;
 }
 
-/* Novo estilo para o container do menu hambúrguer e botão de tema */
 .nav-controls {
     display: flex;
     align-items: center;
-    gap: 15px; /* Espaçamento entre o botão de tema e o hambúrguer */
+    gap: 15px;
 }
-
 
 .main-nav .menu {
     display: flex;
@@ -191,8 +175,8 @@ body::after {
 
 .main-nav .menu a:hover,
 .main-nav .menu a.active {
-    color: #fff; /* Mantém branco para contraste no hover */
-    background-color: rgba(124, 58, 237, 0.3);
+    color: #fff;
+    background-color: rgba(var(--cor-destaque-roxo), 0.3); /* Usando rgba para permitir transparência */
     transform: translateY(-2px);
 }
 
@@ -251,7 +235,7 @@ body::after {
 #theme-toggle {
     background: none;
     border: none;
-    color: var(--cor-texto-principal); /* Cor do ícone */
+    color: var(--cor-texto-principal);
     font-size: 1.5rem;
     cursor: pointer;
     padding: 5px;
@@ -262,14 +246,13 @@ body::after {
 
 #theme-toggle:hover {
     color: var(--cor-link-hover);
-    background-color: rgba(var(--cor-destaque-roxo), 0.1); /* Um leve fundo ao passar o mouse */
+    background-color: rgba(var(--cor-destaque-roxo), 0.1);
 }
 
 #theme-toggle:focus-visible {
     outline: 2px solid var(--focus-outline-color);
     outline-offset: 2px;
 }
-
 
 /* 5. Seções Comuns */
 .secao {
@@ -288,10 +271,10 @@ body::after {
     max-width: 960px;
     width: 100%;
     padding: var(--spacing-medium);
-    background-color: var(--cor-fundo-secundario); /* Usando variável de cor de fundo secundário */
+    background-color: var(--cor-fundo-secundario);
     border-radius: var(--border-radius-padrao);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Transição para content-wrapper */
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
 /* 6. Estilos de Tipografia */
@@ -301,7 +284,7 @@ h2 {
     margin-bottom: var(--spacing-medium);
     position: relative;
     padding-bottom: 10px;
-    transition: color 0.5s ease; /* Transição para h2 */
+    transition: color var(--transition-speed) ease;
 }
 
 h2::after {
@@ -314,21 +297,21 @@ h2::after {
     height: 4px;
     background-color: var(--cor-destaque-roxo);
     border-radius: 2px;
-    transition: background-color 0.5s ease; /* Transição para linha do h2 */
+    transition: background-color var(--transition-speed) ease;
 }
 
 h3 {
     font-size: 1.8rem;
     color: var(--cor-link);
     margin-bottom: var(--spacing-small);
-    transition: color 0.5s ease; /* Transição para h3 */
+    transition: color var(--transition-speed) ease;
 }
 
 p {
     font-size: 1.1rem;
     margin-bottom: var(--spacing-medium);
     color: var(--cor-texto-secundario);
-    transition: color 0.5s ease; /* Transição para p */
+    transition: color var(--transition-speed) ease;
 }
 
 a {
@@ -363,7 +346,7 @@ a:focus-visible {
     border-radius: var(--border-radius-padrao);
     padding: var(--spacing-medium);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color 0.5s ease; /* Transição para card */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -482,7 +465,7 @@ a:focus-visible {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     opacity: 0;
     visibility: hidden;
-    transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease, transform 0.2s ease, background-color 0.5s ease; /* Transição para o botão */
+    transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease, transform 0.2s ease, background-color var(--transition-speed) ease;
     z-index: 1000;
     outline: none;
 }
