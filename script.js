@@ -47,4 +47,3 @@ window.addEventListener('scroll', () => {
 btnVoltarTopo.addEventListener('click', () => {
   ativarSecao('sobre');
 });
-
