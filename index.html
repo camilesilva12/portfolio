@@ -1,63 +1,96 @@
 <!DOCTYPE html>
-<html lang="pt-BR" >
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Camile Silva | Portfólio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Camile Silva | Portfólio de Desenvolvimento Web</title>
+    <meta name="description" content="Portfólio de Camile Silva - Desenvolvedora web apaixonada por criatividade e tecnologia. Conheça meus projetos em HTML, CSS e JavaScript!" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" /> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="navbar" role="banner">
-    <div class="container topo">
-      <div class="logo">
-        <h1>Camile Silva</h1>
-      </div>
-      <nav class="main-nav" aria-label="Menu principal">
-        <ul class="menu">
-          <li><a href="#sobre" class="active">Sobre</a></li>
-          <li><a href="#projetos">Projetos</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main class="content" role="main">
-    <section id="sobre" class="secao ativa sobre-centralizada">
-      <div class="content-wrapper center-box">
-        <h2>Sobre Mim</h2>
-        <p>
-          Olá! Sou Camile da Conceição Silva, apaixonada por criatividade, tecnologia e aprendizado constante.
-          Transformo ideias em projetos reais que inspiram e engajam.
-        </p>
-      </div>
-    </section>
-
-    <section id="projetos" class="secao">
-      <div class="content-wrapper">
-        <h2>Meus Projetos</h2>
-        <div class="grid-projetos">
-          <article class="card-projeto">
-            <h3>Projeto 1: Site da Rapunzel</h3>
-            <p>Site dedicado ao clássico da Disney "Rapunzel", com resumo do filme, galeria de imagens e informações sobre os personagens.</p>
-            <a href="https://camilesilva12.github.io/primeirotrabalho./" target="_blank" rel="noopener noreferrer">Ver Projeto</a>
-          </article>
+    <header class="navbar" role="banner">
+        <div class="container topo">
+            <div class="logo">
+                <h1>Camile Silva</h1>
+            </div>
+            <button class="hamburger-menu" aria-label="Abrir menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="main-nav" aria-label="Menu principal">
+                <ul class="menu">
+                    <li><a href="#sobre" class="active">Sobre</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
         </div>
-      </div>
-    </section>
+    </header>
 
-    <section id="contato" class="secao">
-      <div class="content-wrapper center-box">
-        <h2>Contato</h2>
-        <p>Email: <a href="mailto:camiledaconceicaosilva38@gmail.com">camiledaconceicaosilva38@gmail.com</a></p>
-        <p>WhatsApp: <a href="https://wa.me/5599991724110" target="_blank">(99) 99172-4110</a></p>
-      </div>
-    </section>
-  </main>
+    <main class="content" role="main">
+        <section id="sobre" class="secao ativa" aria-labelledby="titulo-sobre">
+            <div class="content-wrapper center-box">
+                <h2 id="titulo-sobre">Sobre Mim</h2>
+                <img src="https://via.placeholder.com/150" alt="Foto de perfil de Camile Silva" class="foto-perfil"> <p>
+                    Olá! Sou Camile da Conceição Silva, apaixonada por **criatividade, tecnologia e aprendizado constante**. Transformo ideias em projetos reais que inspiram e engajam. Com foco em **desenvolvimento front-end**, busco criar experiências web intuitivas e visualmente atraentes.
+                </p>
+                <h3>Minhas Habilidades:</h3>
+                <ul class="habilidades-lista">
+                    <li>HTML5 e CSS3 (incluindo Flexbox e Grid)</li>
+                    <li>JavaScript (básico e manipulção de DOM)</li>
+                    <li>Design Responsivo</li>
+                    <li>Controle de Versão (Git e GitHub)</li>
+                    <li>Acessibilidade Web</li>
+                </ul>
+                <p>Estou sempre em busca de novos conhecimentos e oportunidades para aplicar minhas habilidades e crescer na área de tecnologia.</p>
+            </div>
+        </section>
 
-  <button id="btn-voltar-topo" aria-label="Voltar ao topo">↑</button>
+        <section id="projetos" class="secao" aria-labelledby="titulo-projetos">
+            <div class="content-wrapper">
+                <h2 id="titulo-projetos">Meus Projetos</h2>
+                <div class="grid-projetos">
+                    <article class="card-projeto">
+                        <img src="https://via.placeholder.com/300x200?text=Projeto+Rapunzel" alt="Screenshot do Projeto Site da Rapunzel" class="imagem-projeto"> <h3>Projeto 1: Site da Rapunzel</h3>
+                        <p>Um site dedicado ao clássico da Disney "Rapunzel", apresentando resumo do filme, galeria de imagens e informações detalhadas sobre os personagens principais. Desenvolvido para praticar layout e organização de conteúdo.</p>
+                        <p><strong>Tecnologias:</strong> HTML5, CSS3, JavaScript.</p>
+                        <div class="links-projeto">
+                            <a href="https://camilesilva12.github.io/primeirotrabalho./" target="_blank" rel="noopener noreferrer">Ver Projeto</a>
+                            <a href="https://github.com/CamileSilva12/primeirotrabalho." target="_blank" rel="noopener noreferrer">Ver Código</a>
+                        </div>
+                    </article>
+                    <article class="card-projeto">
+                        <img src="https://via.placeholder.com/300x200?text=Em+Breve" alt="Screenshot de Futuro Projeto" class="imagem-projeto">
+                        <h3>Projeto Futuro: Nome do Projeto</h3>
+                        <p>Descrição breve do seu próximo projeto ou uma ideia que você tem. Isso mostra iniciativa e planos futuros.</p>
+                        <p><strong>Tecnologias:</strong> [Tecnologias que pretende usar]</p>
+                        <div class="links-projeto">
+                            <a href="#" class="link-desativado">Ver Projeto</a>
+                            <a href="#" class="link-desativado">Ver Código</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-  <script src="script.js"></script>
+        <section id="contato" class="secao" aria-labelledby="titulo-contato">
+            <div class="content-wrapper center-box">
+                <h2 id="titulo-contato">Contato</h2>
+                <p>Se você tem uma proposta de projeto, uma oportunidade de emprego ou apenas quer bater um papo sobre tecnologia, sinta-se à vontade para me contatar!</p>
+                <p>Email: <a href="mailto:camiledaconceicaosilva38@gmail.com">camiledaconceicaosilva38@gmail.com</a></p>
+                <p>WhatsApp: <a href="https://wa.me/5599991724110" target="_blank" rel="noopener noreferrer">(99) 99172-4110</a></p>
+                <div class="redes-sociais">
+                    <p>Conecte-se comigo:</p>
+                    <a href="https://linkedin.com/in/camilesilva" target="_blank" rel="noopener noreferrer">LinkedIn</a> <a href="https://github.com/CamileSilva12" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="btn-voltar-topo" aria-label="Voltar ao topo">↑</button>
+
+    <script src="script.js"></script>
 </body>
 </html>
