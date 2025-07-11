@@ -1,37 +1,41 @@
-// Função que controla a troca das seções
-function trocaSecao(id) {
-  // Esconde todas as seções
-  document.querySelectorAll('.secao').forEach(secao => {
+const menuLinks = document.querySelectorAll('.menu a');
+const secoes = document.querySelectorAll('.secao');
+const btnVoltarTopo = document.getElementById('btn-voltar-topo');
+
+function ativarSecao(id) {
+  secoes.forEach(secao => {
     secao.classList.remove('ativa');
   });
-
-  // Mostra a seção desejada
-  const destino = document.getElementById(id);
-  if (destino) {
-    destino.classList.add('ativa');
+  const secaoAtiva = document.getElementById(id);
+  if (secaoAtiva) {
+    secaoAtiva.classList.add('ativa');
   }
 
-  // Rola suavemente para o topo
+  // Atualiza link ativo do menu
+  menuLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href').substring(1) === id) {
+      link.classList.add('active');
+    }
+  });
+
+  // Scroll suave para topo
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
   });
 }
 
-// Controla clique no menu e links com href que iniciam com #
-document.querySelectorAll('a[href^="#"]').forEach(link => {
+// Clique no menu
+menuLinks.forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
-
     const id = link.getAttribute('href').substring(1);
-    trocaSecao(id);
+    ativarSecao(id);
   });
 });
 
-// Botão fixo voltar ao topo
-const btnVoltarTopo = document.getElementById('btn-voltar-topo');
-
-// Mostra o botão quando o scroll desce 200px
+// Botão fixo "Voltar ao topo"
 window.addEventListener('scroll', () => {
   if (window.scrollY > 200) {
     btnVoltarTopo.classList.add('show');
@@ -40,7 +44,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Clique no botão volta para "sobre"
 btnVoltarTopo.addEventListener('click', () => {
-  trocaSecao('sobre');
+  ativarSecao('sobre');
 });
