@@ -1,9 +1,9 @@
 /* 1. Variáveis CSS */
 :root {
-    /* Cores Padrão (Dark Mode Sutil/Colorido) */
+    /* Cores Padrão (Tema Escuro Sutil/Colorido) */
     --cor-fundo-principal: #1a202c; /* Azul escuro quase preto */
     --cor-fundo-secundario: rgba(26, 32, 44, 0.85); /* Dark Blue semi-transparente para cards */
-    --cor-texto-principal: #e2e8f0; /* Cinza claro */
+    --cor-texto-principal: #e2e8f0; /* Cinza claro/Quase branco (para textos e ícones no tema escuro) */
     --cor-texto-secundario: #a0aec0; /* Cinza médio */
     --cor-link: #63b3ed; /* Azul claro para links */
     --cor-link-hover: #4299e1; /* Azul mais vibrante para hover de links */
@@ -20,11 +20,11 @@
     --spacing-small: 15px;
 }
 
-/* Cores para o Light Mode (sobrescrevem as padrões quando a classe .light-mode está ativa) */
+/* Cores para o Tema Claro (sobrescrevem as padrões quando a classe .light-mode está ativa) */
 body.light-mode {
     --cor-fundo-principal: #f7fafc; /* Branco suave */
     --cor-fundo-secundario: rgba(255, 255, 255, 0.9); /* Branco transparente para cards */
-    --cor-texto-principal: #2d3748; /* Cinza escuro */
+    --cor-texto-principal: #2d3748; /* Cinza escuro (para textos e ícones no tema claro) */
     --cor-texto-secundario: #4a5568; /* Cinza médio escuro */
     --cor-link: #3182ce; /* Azul vibrante para links */
     --cor-link-hover: #2b6cb0; /* Azul mais escuro para hover */
@@ -46,10 +46,37 @@ html {
 }
 
 body {
-    /* Fundo com gradiente animado para ambos os temas */
-    background: linear-gradient(270deg, var(--cor-fundo-principal), var(--cor-destaque-azul), var(--cor-destaque-roxo), var(--cor-fundo-principal));
-    background-size: 800% 800%;
-    animation: gradientShift 20s ease infinite; /* Mantenha a animação */
+    /* ✨ ATUALIZADO: Fundo com gradiente animado E estrelas ✨ */
+    background:
+        /* Camada de estrelas 1 (maiores e mais lentas) */
+        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 100px 70px, #fff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 50px 150px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 150px 100px, #eee, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 200px 20px, #fff, rgba(0,0,0,0)),
+        /* Camada de estrelas 2 (menores e mais rápidas) */
+        radial-gradient(1px 1px at 30px 200px, #ccc, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 250px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 180px 180px, #eee, rgba(0,0,0,0)),
+        /* O seu gradiente de fundo animado original */
+        linear-gradient(270deg, var(--cor-fundo-principal), var(--cor-destaque-azul), var(--cor-destaque-roxo), var(--cor-fundo-principal));
+
+    background-size: 
+        250px 250px, /* Tamanho para o padrão de estrelas 1 */
+        250px 250px, /* Tamanho para o padrão de estrelas 1 */
+        250px 250px, /* Tamanho para o padrão de estrelas 1 */
+        250px 250px, /* Tamanho para o padrão de estrelas 1 */
+        250px 250px, /* Tamanho para o padrão de estrelas 1 */
+        150px 150px, /* Tamanho para o padrão de estrelas 2 */
+        150px 150px, /* Tamanho para o padrão de estrelas 2 */
+        150px 150px, /* Tamanho para o padrão de estrelas 2 */
+        800% 800%; /* Tamanho do seu gradiente original */
+
+    animation: 
+        moveStars1 50s linear infinite, /* Animação para as estrelas 1 */
+        moveStars2 30s linear infinite, /* Animação para as estrelas 2 */
+        gradientShift 20s ease infinite; /* Sua animação de gradiente original */
+
     color: var(--cor-texto-principal);
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
@@ -57,16 +84,29 @@ body {
     position: relative;
     overflow-x: hidden;
     z-index: 0;
-    /* Transições suaves para todas as propriedades de cor e fundo relevantes */
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease,
-                background var(--transition-speed) ease; /* Adicione 'background' para o gradiente */
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    /* A transição do 'background' completo pode causar um salto visual nas estrelas.
+       É melhor transicionar apenas as cores base se a complexidade do fundo for grande. */
 }
 
+/* Animação do gradiente de fundo (original) */
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
+/* ✨ NOVO: Animações para as estrelas ✨ */
+@keyframes moveStars1 {
+    from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0% 50%; }
+    to { background-position: 250px 500px, 500px 250px, 750px 750px, 250px 250px, 500px 500px, 0 0, 0 0, 0 0, 100% 50%; } /* Ajuste os valores para um movimento adequado */
+}
+
+@keyframes moveStars2 {
+    from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0% 50%; } /* As primeiras posições são para as estrelas 1 */
+    to { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 150px 300px, 300px 150px, 450px 450px, 100% 50%; } /* Ajuste os valores para um movimento adequado */
+}
+
 
 .sr-only {
     position: absolute;
@@ -80,46 +120,17 @@ body {
     border-width: 0;
 }
 
-/* 3. Efeitos de Fundo (pseudo-elementos) */
-body::before,
+/* 3. Efeitos de Fundo (pseudo-elementos) - Se você quiser que as bolhas coloridas fiquem ACIMA das estrelas */
+/* Se quiser que as estrelas fiquem ACIMA das bolhas, mantenha o z-index -1 */
+/* body::before,
 body::after {
     content: "";
     position: fixed;
     border-radius: 50%;
     filter: blur(70px);
-    z-index: -1;
+    z-index: 1; 
     transition: background var(--transition-speed) ease, filter var(--transition-speed) ease;
-}
-
-body::before {
-    top: -100px;
-    left: -100px;
-    width: 250px;
-    height: 250px;
-    background: rgba(99, 179, 237, 0.15); /* Cor ajustada para Light/Dark */
-    filter: blur(70px);
-    animation: subtleMove1 15s ease-in-out infinite alternate;
-}
-
-body::after {
-    bottom: -120px;
-    right: -120px;
-    width: 350px;
-    height: 350px;
-    background: rgba(128, 90, 213, 0.15); /* Cor ajustada para Light/Dark */
-    filter: blur(90px);
-    animation: subtleMove2 20s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes subtleMove1 {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 30px); }
-}
-
-@keyframes subtleMove2 {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(-40px, -20px); }
-}
+} */
 
 /* 4. Layout Principal (Header, Main) */
 .navbar {
@@ -147,6 +158,18 @@ body::after {
     color: var(--cor-destaque-roxo);
     margin: 0;
     transition: color var(--transition-speed) ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo h1 .fas {
+    font-size: 1.8rem;
+    color: var(--cor-destaque-roxo);
+}
+
+body.light-mode .logo h1 .fas {
+    color: var(--cor-destaque-azul);
 }
 
 .nav-controls {
@@ -176,7 +199,7 @@ body::after {
 .main-nav .menu a:hover,
 .main-nav .menu a.active {
     color: #fff;
-    background-color: rgba(var(--cor-destaque-roxo), 0.3); /* Usando rgba para permitir transparência */
+    background-color: rgba(128, 90, 213, 0.3);
     transform: translateY(-2px);
 }
 
@@ -246,7 +269,7 @@ body::after {
 
 #theme-toggle:hover {
     color: var(--cor-link-hover);
-    background-color: rgba(var(--cor-destaque-roxo), 0.1);
+    background-color: rgba(128, 90, 213, 0.1);
 }
 
 #theme-toggle:focus-visible {
