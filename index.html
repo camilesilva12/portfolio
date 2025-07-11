@@ -2,10 +2,11 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Camile Silva | Portfólio de Desenvolvimento Web</title>
     <meta name="description" content="Portfólio de Camile Silva - Desenvolvedora web apaixonada por criatividade e tecnologia. Conheça meus projetos em HTML, CSS e JavaScript!" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" /> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -14,12 +15,12 @@
             <div class="logo">
                 <h1>Camile Silva</h1>
             </div>
-            <button class="hamburger-menu" aria-label="Abrir menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <button class="hamburger-menu" aria-label="Abrir menu" aria-expanded="false">
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
             </button>
-            <nav class="main-nav" aria-label="Menu principal">
+            <nav class="main-nav" aria-label="Menu principal" aria-hidden="true">
                 <ul class="menu">
                     <li><a href="#sobre" class="active">Sobre</a></li>
                     <li><a href="#projetos">Projetos</a></li>
@@ -34,11 +35,11 @@
             <div class="content-wrapper center-box">
                 <h2 id="titulo-sobre">Sobre Mim</h2>
                 <p>
-                   Olá! Sou Camile da Conceição Silva, apaixonada por criatividade, tecnologia e aprendizado constante. Transformo ideias em projetos reais que inspiram e engajam. Com foco em desenvolvimento front-end, busco criar experiências web intuitivas e visualmente atraentes.
-
-Estou sempre em busca de novos conhecimentos e oportunidades para aplicar minhas habilidades e crescer na área de tecnologia.
+                    Olá! Sou Camile da Conceição Silva, apaixonada por criatividade, tecnologia e aprendizado constante. Transformo ideias em projetos reais que inspiram e engajam. Com foco em desenvolvimento front-end, busco criar experiências web intuitivas e visualmente atraentes.
                 </p>
-                <p>Estou sempre em busca de novos conhecimentos e oportunidades para aplicar minhas habilidades e crescer na área de tecnologia.</p>
+                <p>
+                    Estou sempre em busca de novos conhecimentos e oportunidades para aplicar minhas habilidades e crescer na área de tecnologia.
+                </p>
             </div>
         </section>
 
@@ -51,17 +52,17 @@ Estou sempre em busca de novos conhecimentos e oportunidades para aplicar minhas
                         <p>Um site dedicado ao clássico da Disney "Rapunzel", apresentando resumo do filme, galeria de imagens e informações detalhadas sobre os personagens principais. Desenvolvido para praticar layout e organização de conteúdo.</p>
                         <p><strong>Tecnologias:</strong> HTML5, CSS3, JavaScript.</p>
                         <div class="links-projeto">
-                            <a href="https://camilesilva12.github.io/primeirotrabalho./" target="_blank" rel="noopener noreferrer">Ver Projeto</a>
-                            <a href="https://github.com/CamileSilva12/primeirotrabalho." target="_blank" rel="noopener noreferrer">Ver Código</a>
+                            <a href="https://camilesilva12.github.io/primeirotrabalho./" target="_blank" rel="noopener noreferrer">Ver Projeto <span class="sr-only">(abre em nova aba)</span></a>
+                            <a href="https://github.com/CamileSilva12/primeirotrabalho." target="_blank" rel="noopener noreferrer">Ver Código <span class="sr-only">(abre em nova aba)</span></a>
                         </div>
                     </article>
                     <article class="card-projeto">
                         <h3>Projeto Futuro: Caçador da Verdade</h3>
-                        <p>Um jogo interativo desenvolvido no **Genially**, focado em combater a desinformação. Os jogadores aprenderão a identificar e desmascarar fake news através de desafios e cenários. Um projeto com impacto social e educativo.</p>
+                        <p>Um jogo interativo desenvolvido no <strong>Genially</strong>, focado em combater a desinformação. Os jogadores aprenderão a identificar e desmascarar fake news através de desafios e cenários. Um projeto com impacto social e educativo.</p>
                         <p><strong>Tecnologias:</strong> Genially (ferramenta de criação de conteúdo interativo).</p>
                         <div class="links-projeto">
-                            <a href="#" class="link-desativado">Ver Projeto</a>
-                            <a href="#" class="link-desativado">Ver Código</a>
+                            <a href="#" class="link-desativado" aria-disabled="true">Ver Projeto <span class="sr-only">(em breve)</span></a>
+                            <a href="#" class="link-desativado" aria-disabled="true">Ver Código <span class="sr-only">(em breve)</span></a>
                         </div>
                     </article>
                 </div>
@@ -71,19 +72,19 @@ Estou sempre em busca de novos conhecimentos e oportunidades para aplicar minhas
         <section id="contato" class="secao" aria-labelledby="titulo-contato">
             <div class="content-wrapper center-box">
                 <h2 id="titulo-contato">Contato</h2>
-                <p Tem uma ideia de projeto, uma oportunidade de colaboração ou quer apenas conversar sobre tecnologia? Entre em contato, será um prazer conversar com você.</p>
+                <p>Tem uma ideia de projeto, uma oportunidade de colaboração ou quer apenas conversar sobre tecnologia? Entre em contato, será um prazer conversar com você.</p>
                 <p>Email: <a href="mailto:camiledaconceicaosilva38@gmail.com">camiledaconceicaosilva38@gmail.com</a></p>
                 <p>WhatsApp: <a href="https://wa.me/5599991724110" target="_blank" rel="noopener noreferrer">(99) 99172-4110</a></p>
                 <div class="redes-sociais">
                     <p>Conecte-se comigo:</p>
                     <a href="https://github.com/CamileSilva12" target="_blank" rel="noopener noreferrer">GitHub</a>
-                </div>
+                    </div>
             </div>
         </section>
     </main>
 
     <button id="btn-voltar-topo" aria-label="Voltar ao topo">↑</button>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
