@@ -141,21 +141,34 @@ main.content {
   margin-bottom: 1rem;
 }
 
-.btn-voltar {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
-  background: #1d4ed8;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: background 0.3s, box-shadow 0.3s;
-  font-weight: bold;
+/* Botão fixo voltar ao topo */
+#btn-voltar-topo {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #1d4ed8;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(29,78,216,0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
 }
 
-.btn-voltar:hover {
-  background: #1e40af;
-  box-shadow: 0 0 10px #1e3a8a70;
+#btn-voltar-topo.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#btn-voltar-topo:hover {
+  background-color: #1e40af;
+  box-shadow: 0 0 12px #1e3a8aaa;
 }
 
 /* Responsivo */
