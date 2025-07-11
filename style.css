@@ -12,7 +12,7 @@
     --spacing-large: 60px;
     --spacing-medium: 30px;
     --spacing-small: 15px;
-    --altura-header: 80px;
+    --altura-header: 80px; /* Altura do seu cabeçalho */
 }
 
 /* 2. Reset Básico e Estilos Globais */
@@ -248,41 +248,14 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Seção Sobre Mim Específica */
-.foto-perfil {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: var(--spacing-medium);
-    border: 4px solid var(--cor-destaque-roxo);
-    box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
-}
-
-.habilidades-lista {
-    list-style: none;
-    padding: 0;
-    margin-bottom: var(--spacing-medium);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-.habilidades-lista li {
-    background-color: rgba(96, 165, 250, 0.2);
-    color: var(--cor-texto-principal);
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 0.95rem;
-    font-weight: 500;
-}
+/* Seção Sobre Mim Específica: REMOVIDO .foto-perfil e .habilidades-lista */
+/* O estilo para .foto-perfil e .habilidades-lista foi removido, pois esses elementos não estão mais no HTML. */
 
 
 /* 7. Componentes Específicos (Projetos, Cards) */
 .grid-projetos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajustado minmax para cards sem imagem */
     gap: var(--spacing-medium);
     padding: var(--spacing-medium) 0;
     max-width: 1000px; /* Limita a largura da grade de projetos */
@@ -300,6 +273,8 @@ a:hover {
     align-items: center;
     text-align: center;
     position: relative; /* Para potencial overlay */
+    min-height: 250px; /* Adicionado para dar uma altura mínima aos cards sem imagem */
+    justify-content: space-between; /* Para espaçar o conteúdo e empurrar links para baixo */
 }
 
 .card-projeto:hover {
@@ -307,14 +282,7 @@ a:hover {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-.card-projeto .imagem-projeto {
-    max-width: 100%;
-    height: 200px; /* Altura fixa para as imagens dos projetos */
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
-    border-radius: 8px;
-    margin-bottom: var(--spacing-small);
-    border: 1px solid rgba(124, 58, 237, 0.5);
-}
+/* REMOVIDO: .card-projeto .imagem-projeto não é mais necessário */
 
 .card-projeto h3 {
     font-size: 1.5rem;
