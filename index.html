@@ -1,46 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" >
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Camile Silva | Portfólio</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .animated-shape {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      background: rgba(96, 165, 250, 0.15);
-      border-radius: 50%;
-      filter: blur(30px);
-      animation: float 6s ease-in-out infinite;
-      z-index: -1;
-    }
-
-    .shape1 { top: 10%; left: 5%; animation-delay: 0s; }
-    .shape2 { top: 50%; right: 5%; animation-delay: 2s; }
-    .shape3 { bottom: 10%; left: 40%; animation-delay: 4s; }
-
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0px); }
-    }
-  </style>
 </head>
 <body>
-  <!-- Formas animadas ao fundo -->
-  <div class="animated-shape shape1"></div>
-  <div class="animated-shape shape2"></div>
-  <div class="animated-shape shape3"></div>
-
-  <header class="navbar">
+  <header class="navbar" role="banner">
     <div class="container topo">
       <div class="logo">
         <h1>Camile Silva</h1>
       </div>
-      <nav class="main-nav">
+      <nav class="main-nav" aria-label="Menu principal">
         <ul class="menu">
           <li><a href="#sobre" class="active">Sobre</a></li>
           <li><a href="#projetos">Projetos</a></li>
@@ -50,7 +23,7 @@
     </div>
   </header>
 
-  <main class="content">
+  <main class="content" role="main">
     <section id="sobre" class="secao ativa sobre-centralizada">
       <div class="content-wrapper center-box">
         <h2>Sobre Mim</h2>
@@ -62,11 +35,11 @@
       <div class="content-wrapper">
         <h2>Meus Projetos</h2>
         <div class="grid-projetos">
-          <div class="card-projeto">
+          <article class="card-projeto">
             <h3>Projeto 1: Site da Rapunzel</h3>
             <p>Site dedicado ao clássico da Disney "Rapunzel", com resumo do filme, galeria de imagens e informações sobre os personagens.</p>
-            <a href="https://camilesilva12.github.io/primeirotrabalho./" target="_blank">Ver Projeto</a>
-          </div>
+            <a href="https://camilesilva12.github.io/primeirotrabalho./" target="_blank" rel="noopener noreferrer">Ver Projeto</a>
+          </article>
         </div>
       </div>
     </section>
@@ -75,7 +48,7 @@
       <div class="content-wrapper center-box">
         <h2>Contato</h2>
         <p>Me encontre no email: <a href="mailto:camiledaconceicaosilva38@gmail.com">camiledaconceicaosilva38@gmail.com</a></p>
-        <p>Ou pelo WhatsApp: <a href="https://wa.me/5599991724110" target="_blank">(99) 99172-4110</a></p>
+        <p>Ou pelo WhatsApp: <a href="https://wa.me/5599991724110" target="_blank" rel="noopener noreferrer">(99) 99172-4110</a></p>
       </div>
     </section>
   </main>
