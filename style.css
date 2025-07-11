@@ -80,7 +80,7 @@ main.content {
   padding: 0 1rem;
 }
 
-/* Seções */
+/* Seções padrão */
 .secao {
   display: none;
   opacity: 0;
@@ -88,20 +88,50 @@ main.content {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+/* Seção ativa */
 .secao.ativa {
   display: block;
   opacity: 1;
   transform: translateY(0);
 }
 
-.content-wrapper {
-  background-color: #1e293b;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(96, 165, 250, 0.3);
+/* Seção SOBRE - centralizada vertical e horizontalmente */
+.sobre-centralizada {
+  display: flex !important; /* força flex */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 1rem;
+  background-color: #0f172a; /* fundo escuro */
+  box-sizing: border-box;
 }
 
-/* Centraliza e estiliza a caixa de Sobre e Contato */
+.sobre-centralizada .content-wrapper {
+  max-width: 600px;
+  text-align: center;
+  background-color: #1e293b;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(96, 165, 250, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.sobre-centralizada .content-wrapper:hover {
+  transform: scale(1.02);
+}
+
+.sobre-centralizada h2 {
+  margin-bottom: 1.5rem;
+  color: #60a5fa;
+}
+
+.sobre-centralizada p {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+/* Centraliza e estiliza a caixa do contato e demais */
 .center-box {
   max-width: 600px;
   margin: 3rem auto;
