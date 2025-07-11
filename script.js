@@ -11,7 +11,6 @@ function ativarSecao(id) {
     secaoAtiva.classList.add('ativa');
   }
 
-  // Atualiza link ativo do menu
   menuLinks.forEach(link => {
     link.classList.remove('active');
     if (link.getAttribute('href').substring(1) === id) {
@@ -19,14 +18,12 @@ function ativarSecao(id) {
     }
   });
 
-  // Scroll suave para topo
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
   });
 }
 
-// Clique no menu
 menuLinks.forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
@@ -35,7 +32,6 @@ menuLinks.forEach(link => {
   });
 });
 
-// Botão fixo "Voltar ao topo"
 window.addEventListener('scroll', () => {
   if (window.scrollY > 200) {
     btnVoltarTopo.classList.add('show');
