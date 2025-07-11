@@ -1,5 +1,6 @@
- /* 1. Variáveis CSS */
+/* 1. Variáveis CSS */
 :root {
+    /* Cores Padrão (Dark Mode) */
     --cor-fundo-principal: #0f172a; /* Dark Blue */
     --cor-fundo-secundario: rgba(15, 23, 42, 0.7); /* Dark Blue semi-transparente para cards */
     --cor-texto-principal: #e0e7ff; /* Light Blue/White */
@@ -8,21 +9,50 @@
     --cor-link-hover: #7c3aed; /* Purple para hover de links */
     --cor-destaque-roxo: #7c3aed; /* Purple */
     --cor-destaque-azul: #2563eb; /* Blue */
-    --border-radius-padrao: 10px;
-    --spacing-large: 60px;
-    --spacing-medium: 30px;
-    --spacing-small: 15px;
-    --altura-header: 80px; /* Altura do seu cabeçalho */
 
     /* Variáveis adicionadas para acessibilidade/consistência */
     --focus-outline-color: var(--cor-link-hover);
     --transition-speed: 0.3s;
+    --altura-header: 80px; /* Altura do seu cabeçalho */
+    --border-radius-padrao: 10px;
+    --spacing-large: 60px;
+    --spacing-medium: 30px;
+    --spacing-small: 15px;
 }
+
+/* Cores para o Light Mode (sobrescrevem as padrões quando a classe .light-mode está ativa) */
+body.light-mode {
+    --cor-fundo-principal: #f0f4f8; /* Light Gray/Blue */
+    --cor-fundo-secundario: rgba(255, 255, 255, 0.8); /* White semi-transparente para cards */
+    --cor-texto-principal: #2d3748; /* Dark Gray */
+    --cor-texto-secundario: #4a5568; /* Medium Gray */
+    --cor-link: #4299e1; /* Bright Blue para links */
+    --cor-link-hover: #3182ce; /* Darker Blue para hover */
+    --cor-destaque-roxo: #667eea; /* Medium Blue/Purple */
+    --cor-destaque-azul: #3182ce; /* Blue */
+    
+    /* Ajuste de gradiente de fundo para light mode */
+    background: linear-gradient(270deg, var(--cor-fundo-principal), #e2e8f0, #cbd5e0, var(--cor-fundo-principal));
+    background-size: 800% 800%;
+    animation: gradientShift 20s ease infinite;
+}
+
+/* Ajuste de efeito de fundo para light mode */
+body.light-mode::before {
+    background: rgba(96, 165, 250, 0.1); /* Azul claro mais sutil */
+    filter: blur(50px);
+}
+
+body.light-mode::after {
+    background: rgba(102, 126, 234, 0.1); /* Roxo mais sutil */
+    filter: blur(60px);
+}
+
 
 /* 2. Reset Básico e Estilos Globais */
 *,
 *::before,
-*::after { /* Inclui pseudo-elements no box-sizing */
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -41,8 +71,9 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     position: relative;
-    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
-    z-index: 0; /* Garante que o conteúdo esteja acima dos pseudo-elementos de fundo */
+    overflow-x: hidden;
+    z-index: 0;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave para mudança de tema */
 }
 
 @keyframes gradientShift {
@@ -51,7 +82,6 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Classe para conteúdo visível apenas para leitores de tela (SR-Only) */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -70,8 +100,9 @@ body::after {
     content: "";
     position: fixed;
     border-radius: 50%;
-    filter: blur(70px); /* Ajustado para um valor base, individualizado abaixo */
-    z-index: -1; /* Garante que fiquem no fundo */
+    filter: blur(70px);
+    z-index: -1;
+    transition: background 0.5s ease, filter 0.5s ease; /* Transição para efeitos de fundo */
 }
 
 body::before {
@@ -79,8 +110,8 @@ body::before {
     left: -100px;
     width: 250px;
     height: 250px;
-    background: rgba(96, 165, 250, 0.15); /* Azul claro */
-    filter: blur(70px); /* Mantido, mas pode ser ajustado */
+    background: rgba(96, 165, 250, 0.15);
+    filter: blur(70px);
     animation: subtleMove1 15s ease-in-out infinite alternate;
 }
 
@@ -89,8 +120,8 @@ body::after {
     right: -120px;
     width: 350px;
     height: 350px;
-    background: rgba(124, 58, 237, 0.15); /* Roxo */
-    filter: blur(90px); /* Mantido, mas pode ser ajustado */
+    background: rgba(124, 58, 237, 0.15);
+    filter: blur(90px);
     animation: subtleMove2 20s ease-in-out infinite alternate-reverse;
 }
 
@@ -112,6 +143,7 @@ body::after {
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Transição para navbar */
 }
 
 .container.topo {
@@ -121,23 +153,28 @@ body::after {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    height: var(--altura-header); /* Garante altura consistente do topo */
+    height: var(--altura-header);
 }
 
 .logo h1 {
     font-size: 2rem;
     color: var(--cor-destaque-roxo);
     margin: 0;
+    transition: color 0.5s ease; /* Transição para logo */
 }
+
+/* Novo estilo para o container do menu hambúrguer e botão de tema */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaçamento entre o botão de tema e o hambúrguer */
+}
+
 
 .main-nav .menu {
     display: flex;
     list-style: none;
-    gap: 25px; /* Usando gap para espaçamento entre itens do menu */
-}
-
-.main-nav .menu li {
-    /* margin-left: 25px; REMOVIDO: substituído por gap */
+    gap: 25px;
 }
 
 .main-nav .menu a {
@@ -148,23 +185,22 @@ body::after {
     transition: color var(--transition-speed) ease, background-color var(--transition-speed) ease, transform 0.2s ease;
     border-radius: 5px;
     position: relative;
-    overflow: hidden; /* Para o efeito de underline */
-    outline: none; /* Remove o outline padrão para customizar */
+    overflow: hidden;
+    outline: none;
 }
 
 .main-nav .menu a:hover,
 .main-nav .menu a.active {
-    color: #fff;
+    color: #fff; /* Mantém branco para contraste no hover */
     background-color: rgba(124, 58, 237, 0.3);
     transform: translateY(-2px);
 }
 
-.main-nav .menu a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+.main-nav .menu a:focus-visible {
     outline: 2px solid var(--focus-outline-color);
     outline-offset: 2px;
 }
 
-/* Underline animado no hover/active */
 .main-nav .menu a::after {
     content: '';
     position: absolute;
@@ -180,24 +216,24 @@ body::after {
 
 .main-nav .menu a:hover::after,
 .main-nav .menu a.active::after,
-.main-nav .menu a:focus-visible::after { /* Adicionado focus-visible */
+.main-nav .menu a:focus-visible::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
 
 /* Hamburger Menu */
 .hamburger-menu {
-    display: none; /* Esconder por padrão em telas maiores */
+    display: none;
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
-    z-index: 101; /* Acima do menu */
-    position: relative; /* Para alinhamento de barras */
-    outline: none; /* Remove o outline padrão para customizar */
+    z-index: 101;
+    position: relative;
+    outline: none;
 }
 
-.hamburger-menu:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+.hamburger-menu:focus-visible {
     outline: 2px solid var(--focus-outline-color);
     outline-offset: 2px;
 }
@@ -211,16 +247,36 @@ body::after {
     transition: all var(--transition-speed) ease-in-out;
 }
 
-/* 5. Seções Comuns */
-.content {
-    /* padding-top: var(--spacing-medium); REMOVIDO: O espaçamento será tratado pela margin-top das seções */
+/* Estilo do Botão de Alternar Tema */
+#theme-toggle {
+    background: none;
+    border: none;
+    color: var(--cor-texto-principal); /* Cor do ícone */
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: color var(--transition-speed) ease, background-color var(--transition-speed) ease;
+    outline: none;
 }
 
+#theme-toggle:hover {
+    color: var(--cor-link-hover);
+    background-color: rgba(var(--cor-destaque-roxo), 0.1); /* Um leve fundo ao passar o mouse */
+}
+
+#theme-toggle:focus-visible {
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 2px;
+}
+
+
+/* 5. Seções Comuns */
 .secao {
     padding: var(--spacing-large) var(--spacing-medium);
-    margin-top: calc(var(--altura-header) * -1); /* Compensa a altura do cabeçalho */
-    padding-top: calc(var(--altura-header) + var(--spacing-large)); /* Adiciona o padding real da seção */
-    min-height: 100vh; /* Garante que a seção ocupe no mínimo 100% da altura da viewport */
+    margin-top: calc(var(--altura-header) * -1);
+    padding-top: calc(var(--altura-header) + var(--spacing-large));
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -232,10 +288,10 @@ body::after {
     max-width: 960px;
     width: 100%;
     padding: var(--spacing-medium);
-    background-color: rgba(15, 23, 42, 0.5);
+    background-color: var(--cor-fundo-secundario); /* Usando variável de cor de fundo secundário */
     border-radius: var(--border-radius-padrao);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    /* margin-top: var(--spacing-medium); Adicionado se precisar de espaço acima do wrapper, mas .secao já tem padding */
+    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Transição para content-wrapper */
 }
 
 /* 6. Estilos de Tipografia */
@@ -245,6 +301,7 @@ h2 {
     margin-bottom: var(--spacing-medium);
     position: relative;
     padding-bottom: 10px;
+    transition: color 0.5s ease; /* Transição para h2 */
 }
 
 h2::after {
@@ -257,25 +314,28 @@ h2::after {
     height: 4px;
     background-color: var(--cor-destaque-roxo);
     border-radius: 2px;
+    transition: background-color 0.5s ease; /* Transição para linha do h2 */
 }
 
 h3 {
     font-size: 1.8rem;
     color: var(--cor-link);
     margin-bottom: var(--spacing-small);
+    transition: color 0.5s ease; /* Transição para h3 */
 }
 
 p {
     font-size: 1.1rem;
     margin-bottom: var(--spacing-medium);
     color: var(--cor-texto-secundario);
+    transition: color 0.5s ease; /* Transição para p */
 }
 
 a {
     color: var(--cor-link);
     text-decoration: none;
     transition: color var(--transition-speed) ease;
-    outline: none; /* Remove o outline padrão para customizar */
+    outline: none;
 }
 
 a:hover {
@@ -283,7 +343,7 @@ a:hover {
     text-decoration: underline;
 }
 
-a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+a:focus-visible {
     outline: 2px solid var(--focus-outline-color);
     outline-offset: 2px;
 }
@@ -303,7 +363,7 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
     border-radius: var(--border-radius-padrao);
     padding: var(--spacing-medium);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color 0.5s ease; /* Transição para card */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -355,7 +415,7 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
     transform: translateY(-2px);
 }
 
-.card-projeto a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+.card-projeto a:focus-visible {
     outline: 2px solid var(--focus-outline-color);
     outline-offset: 2px;
 }
@@ -367,13 +427,12 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
 }
 
 .card-projeto a.link-desativado:hover,
-.card-projeto a.link-desativado:focus-visible { /* Garante que o hover/focus não altere o desativado */
+.card-projeto a.link-desativado:focus-visible {
     background-color: #5a627a;
     transform: none;
-    outline: none; /* Desativa outline para links desativados */
+    outline: none;
 }
 
-/* Seção de Contato Específica */
 .redes-sociais {
     margin-top: var(--spacing-medium);
     display: flex;
@@ -398,7 +457,7 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
     text-decoration: none;
 }
 
-.redes-sociais a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+.redes-sociais a:focus-visible {
     outline: 2px solid var(--focus-outline-color);
     outline-offset: 2px;
 }
@@ -423,9 +482,9 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     opacity: 0;
     visibility: hidden;
-    transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease, transform 0.2s ease;
+    transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease, transform 0.2s ease, background-color 0.5s ease; /* Transição para o botão */
     z-index: 1000;
-    outline: none; /* Remove o outline padrão para customizar */
+    outline: none;
 }
 
 #btn-voltar-topo.show {
@@ -438,42 +497,41 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
     transform: translateY(-3px);
 }
 
-#btn-voltar-topo:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
+#btn-voltar-topo:focus-visible {
     outline: 2px solid var(--focus-outline-color);
     outline-offset: 2px;
 }
 
 /* 9. Media Queries (Responsividade) */
 @media (max-width: 768px) {
-    /* Navbar e Menu */
     .hamburger-menu {
-        display: block; /* Mostrar o hambúrguer no mobile */
+        display: block;
     }
 
     .main-nav {
         position: fixed;
         top: 0;
         right: 0;
-        width: 70%; /* Largura do menu lateral no mobile */
+        width: 70%;
         height: 100%;
         background-color: var(--cor-fundo-principal);
         flex-direction: column;
         justify-content: flex-start;
-        padding-top: var(--altura-header); /* Para o conteúdo não ficar atrás do cabeçalho */
-        transform: translateX(100%); /* Esconder menu para a direita */
+        padding-top: var(--altura-header);
+        transform: translateX(100%);
         transition: transform var(--transition-speed) ease-in-out;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
     }
 
-    .main-nav.active { /* Classe adicionada via JS */
-        transform: translateX(0); /* Mostrar menu */
+    .main-nav.active {
+        transform: translateX(0);
     }
 
     .main-nav .menu {
         flex-direction: column;
         width: 100%;
         padding: 20px 0;
-        gap: 0; /* Remover gap para itens empilhados */
+        gap: 0;
     }
 
     .main-nav .menu li {
@@ -491,7 +549,6 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
         border-bottom: none;
     }
 
-    /* Animação do Hambúrguer */
     .hamburger-menu.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
@@ -504,7 +561,6 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    /* Conteúdo geral */
     h2 {
         font-size: 2rem;
     }
@@ -518,7 +574,7 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
     }
 
     .secao {
-        padding: var(--spacing-large) var(--spacing-small); /* Menor padding lateral */
+        padding: var(--spacing-large) var(--spacing-small);
     }
 
     .content-wrapper {
@@ -526,7 +582,7 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
     }
 
     .grid-projetos {
-        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -544,7 +600,6 @@ a:focus-visible { /* A11y: Outline apenas quando navegado por teclado */
         padding: var(--spacing-small);
     }
 
-    /* Ajuste para o padding das seções em telas muito pequenas */
     .secao {
         padding-left: var(--spacing-small);
         padding-right: var(--spacing-small);
