@@ -283,7 +283,7 @@ body.light-mode .logo h1 .fas {
     transition: all var(--transition-speed) ease-in-out;
 }
 
-/* Estilo do Botão de Alternar Tema (agora fixo no canto) */
+/* Estilo do Botão de Alternar Tema (fixo no canto) */
 #theme-toggle {
     position: fixed; /* Fixa o botão na tela */
     top: 20px; /* Distância do topo */
