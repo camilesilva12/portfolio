@@ -417,21 +417,22 @@ a:focus-visible {
     justify-content: flex-start;
 }
 
-
 .card-projeto:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilo para as imagens dos projetos (mantido para o segundo card) */
+/* Estilo para as imagens dos projetos (agora usado no card Rapunzel também) */
 .projeto-imagem {
     max-width: 100%;
-    height: auto;
+    height: auto; /* Mantém a proporção da imagem */
+    /* Para a imagem da Rapunzel, podemos querer que ela preencha o espaço sem ser achatada */
+    height: 180px; /* Altura fixa para as imagens dos projetos */
+    object-fit: cover; /* Recorta a imagem para preencher o espaço mantendo proporção */
     border-radius: var(--border-radius-padrao);
     margin-bottom: var(--spacing-small);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    object-fit: cover;
 }
 
 .projeto-imagem:hover {
@@ -439,37 +440,56 @@ a:focus-visible {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* ✨ ATUALIZADO: Estilos específicos para o card do projeto Rapunzel com overlay para legibilidade ✨ */
-.card-projeto.projeto-rapunzel-card {
-    /* Adiciona uma camada preta semi-transparente (rgba(0,0,0,0.4)) SOBRE a imagem de fundo */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://cdn.wallpapersafari.com/58/52/OjEDGH.jpg');
-    background-size: cover; /* Faz a imagem cobrir todo o card sem distorcer (cortando se necessário) */
-    background-position: center center; /* Centraliza a imagem no fundo do card */
-    background-repeat: no-repeat;
-    background-color: transparent; /* Garante que o fundo primário do card não apareça por cima da imagem */
-    
-    /* Cores de texto e sombra para legibilidade sobre a imagem escura */
-    color: white; /* Cor do texto no card Rapunzel */
-    text-shadow: 1px 1px 5px rgba(0,0,0,1); /* Sombra mais forte para o texto para melhorar contraste */
+/* ✨ REMOVIDO: Estilos específicos para o card do projeto Rapunzel como background. ✨ */
+/* .card-projeto.projeto-rapunzel-card { ... } */
+
+
+/* ✨ NOVO: Estilos para os ícones de redes sociais na seção Contato ✨ */
+.redes-sociais-icones {
+    display: flex;
+    justify-content: center; /* Centraliza os ícones na horizontal */
+    gap: var(--spacing-medium); /* Espaçamento entre os ícones */
+    margin-top: var(--spacing-medium); /* Espaço acima dos ícones */
+    flex-wrap: wrap; /* Permite que os ícones quebrem linha em telas menores */
 }
 
-/* Ajustes para o hover do card Rapunzel (adiciona um leve overlay escuro MAIS FORTE) */
-.card-projeto.projeto-rapunzel-card:hover {
-    /* Aumenta a opacidade da camada escura no hover para um efeito visual */
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://cdn.wallpapersafari.com/58/52/OjEDGH.jpg');
-    /* Mantém as transições de transform e box-shadow do .card-projeto geral */
+.redes-sociais-icones a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Tamanho do círculo para o ícone */
+    height: 60px;
+    border-radius: 50%; /* Transforma o elemento em um círculo */
+    background-color: var(--cor-destaque-roxo); /* Cor de fundo do círculo */
+    color: white; /* Cor do ícone */
+    font-size: 2.2rem; /* Tamanho do ícone */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    text-decoration: none; /* Garante que links de ícone não tenham sublinhado */
+    outline: none; /* Remove o outline padrão ao focar */
 }
 
-/* Garante que os links dentro do card Rapunzel sejam visíveis */
-.card-projeto.projeto-rapunzel-card a {
-    color: #fff; /* Links brancos */
-    border-color: #fff; /* Borda branca */
-    background-color: rgba(255, 255, 255, 0.2); /* Fundo sutil para os links */
+.redes-sociais-icones a:hover {
+    background-color: var(--cor-link-hover); /* Muda a cor de fundo no hover */
+    transform: translateY(-5px) scale(1.05); /* Efeito de elevação */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+    text-decoration: none; /* Reitera a remoção do sublinhado no hover */
 }
 
-.card-projeto.projeto-rapunzel-card a:hover {
-    background-color: rgba(255, 255, 255, 0.4); /* Fundo mais visível no hover */
-    color: #000; /* Texto preto nos links no hover */
+.redes-sociais-icones a:focus-visible {
+    outline: 2px solid var(--focus-outline-color); /* Estilo de foco para acessibilidade */
+    outline-offset: 2px;
+}
+
+
+/* Para o tema claro: ajustar as cores dos ícones */
+body.light-mode .redes-sociais-icones a {
+    background-color: var(--cor-destaque-azul); /* Cor de fundo no tema claro */
+    color: white; /* Cor do ícone no tema claro */
+}
+
+body.light-mode .redes-sociais-icones a:hover {
+    background-color: var(--cor-link-hover); /* Cor de fundo no hover no tema claro */
 }
 
 
@@ -591,27 +611,4 @@ a:focus-visible {
         padding: var(--spacing-small);
     }
 
-    .grid-projetos {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo h1 {
-        font-size: 1.8rem;
-    }
-
-    h2 {
-        font-size: 1.8rem;
-        margin-bottom: var(--spacing-small);
-    }
-
-    .card-projeto {
-        padding: var(--spacing-small);
-    }
-
-    .secao {
-        padding-left: var(--spacing-small);
-        padding-right: var(--spacing-small);
-    }
-}
+    .grid-projetos
