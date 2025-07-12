@@ -46,7 +46,7 @@ html {
 }
 
 body {
-    /* ✨ ATUALIZADO: Fundo com gradiente animado E estrelas ✨ */
+    /* Fundo com gradiente animado E estrelas */
     background:
         /* Camada de estrelas 1 (maiores e mais lentas) */
         radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
@@ -72,6 +72,8 @@ body {
         150px 150px, /* Tamanho para o padrão de estrelas 2 */
         800% 800%; /* Tamanho do seu gradiente original */
 
+    background-attachment: fixed; /* Garante que o fundo das estrelas não se mova com o scroll */
+
     animation: 
         moveStars1 50s linear infinite, /* Animação para as estrelas 1 */
         moveStars2 30s linear infinite, /* Animação para as estrelas 2 */
@@ -85,8 +87,6 @@ body {
     overflow-x: hidden;
     z-index: 0;
     transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-    /* A transição do 'background' completo pode causar um salto visual nas estrelas.
-       É melhor transicionar apenas as cores base se a complexidade do fundo for grande. */
 }
 
 /* Animação do gradiente de fundo (original) */
@@ -96,15 +96,15 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* ✨ NOVO: Animações para as estrelas ✨ */
+/* Animações para as estrelas */
 @keyframes moveStars1 {
     from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0% 50%; }
-    to { background-position: 250px 500px, 500px 250px, 750px 750px, 250px 250px, 500px 500px, 0 0, 0 0, 0 0, 100% 50%; } /* Ajuste os valores para um movimento adequado */
+    to { background-position: 250px 500px, 500px 250px, 750px 750px, 250px 250px, 500px 500px, 0 0, 0 0, 0 0, 100% 50%; }
 }
 
 @keyframes moveStars2 {
-    from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0% 50%; } /* As primeiras posições são para as estrelas 1 */
-    to { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 150px 300px, 300px 150px, 450px 450px, 100% 50%; } /* Ajuste os valores para um movimento adequado */
+    from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0% 50%; }
+    to { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 150px 300px, 300px 150px, 450px 450px, 100% 50%; }
 }
 
 
@@ -120,17 +120,46 @@ body {
     border-width: 0;
 }
 
-/* 3. Efeitos de Fundo (pseudo-elementos) - Se você quiser que as bolhas coloridas fiquem ACIMA das estrelas */
-/* Se quiser que as estrelas fiquem ACIMA das bolhas, mantenha o z-index -1 */
-/* body::before,
+/* 3. Efeitos de Fundo (pseudo-elementos) */
+body::before,
 body::after {
     content: "";
     position: fixed;
     border-radius: 50%;
     filter: blur(70px);
-    z-index: 1; 
+    z-index: -1;
     transition: background var(--transition-speed) ease, filter var(--transition-speed) ease;
-} */
+}
+
+body::before {
+    top: -100px;
+    left: -100px;
+    width: 250px;
+    height: 250px;
+    background: rgba(99, 179, 237, 0.15);
+    filter: blur(70px);
+    animation: subtleMove1 15s ease-in-out infinite alternate;
+}
+
+body::after {
+    bottom: -120px;
+    right: -120px;
+    width: 350px;
+    height: 350px;
+    background: rgba(128, 90, 213, 0.15);
+    filter: blur(90px);
+    animation: subtleMove2 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes subtleMove1 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 30px); }
+}
+
+@keyframes subtleMove2 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-40px, -20px); }
+}
 
 /* 4. Layout Principal (Header, Main) */
 .navbar {
@@ -372,100 +401,75 @@ a:focus-visible {
     transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
     position: relative;
     min-height: 250px;
     justify-content: space-between;
 }
+
+.card-projeto h3,
+.card-projeto p {
+    /* Alinha o texto dos cards à esquerda */
+    text-align: left;
+}
+
+.card-projeto .links-projeto {
+    /* Alinha os botões dos cards à esquerda */
+    justify-content: flex-start;
+}
+
 
 .card-projeto:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-.card-projeto h3 {
-    font-size: 1.5rem;
-    color: var(--cor-link);
+/* Estilo para as imagens dos projetos (mantido para o segundo card) */
+.projeto-imagem {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-padrao);
     margin-bottom: var(--spacing-small);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    object-fit: cover;
 }
 
-.card-projeto p {
-    font-size: 1rem;
-    color: var(--cor-texto-secundario);
-    margin-bottom: var(--spacing-medium);
-    flex-grow: 1;
+.projeto-imagem:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.card-projeto .links-projeto {
-    margin-top: auto;
-    display: flex;
-    gap: var(--spacing-small);
-    flex-wrap: wrap;
-    justify-content: center;
+/* ✨ ATUALIZADO: Estilos específicos para o card do projeto Rapunzel com overlay para legibilidade ✨ */
+.card-projeto.projeto-rapunzel-card {
+    /* Adiciona uma camada preta semi-transparente (rgba(0,0,0,0.4)) SOBRE a imagem de fundo */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://cdn.wallpapersafari.com/58/52/OjEDGH.jpg');
+    background-size: cover; /* Faz a imagem cobrir todo o card sem distorcer (cortando se necessário) */
+    background-position: center center; /* Centraliza a imagem no fundo do card */
+    background-repeat: no-repeat;
+    background-color: transparent; /* Garante que o fundo primário do card não apareça por cima da imagem */
+    
+    /* Cores de texto e sombra para legibilidade sobre a imagem escura */
+    color: white; /* Cor do texto no card Rapunzel */
+    text-shadow: 1px 1px 5px rgba(0,0,0,1); /* Sombra mais forte para o texto para melhorar contraste */
 }
 
-.card-projeto a {
-    display: inline-block;
-    background-color: var(--cor-destaque-roxo);
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color var(--transition-speed) ease, transform 0.2s ease;
+/* Ajustes para o hover do card Rapunzel (adiciona um leve overlay escuro MAIS FORTE) */
+.card-projeto.projeto-rapunzel-card:hover {
+    /* Aumenta a opacidade da camada escura no hover para um efeito visual */
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://cdn.wallpapersafari.com/58/52/OjEDGH.jpg');
+    /* Mantém as transições de transform e box-shadow do .card-projeto geral */
 }
 
-.card-projeto a:hover {
-    background-color: #6d28d9;
-    transform: translateY(-2px);
+/* Garante que os links dentro do card Rapunzel sejam visíveis */
+.card-projeto.projeto-rapunzel-card a {
+    color: #fff; /* Links brancos */
+    border-color: #fff; /* Borda branca */
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo sutil para os links */
 }
 
-.card-projeto a:focus-visible {
-    outline: 2px solid var(--focus-outline-color);
-    outline-offset: 2px;
-}
-
-.card-projeto a.link-desativado {
-    background-color: #5a627a;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-.card-projeto a.link-desativado:hover,
-.card-projeto a.link-desativado:focus-visible {
-    background-color: #5a627a;
-    transform: none;
-    outline: none;
-}
-
-.redes-sociais {
-    margin-top: var(--spacing-medium);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.redes-sociais a {
-    font-size: 1.1rem;
-    font-weight: 600;
-    border: 1px solid var(--cor-link);
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
-}
-
-.redes-sociais a:hover {
-    background-color: var(--cor-link-hover);
-    color: #fff;
-    border-color: var(--cor-link-hover);
-    text-decoration: none;
-}
-
-.redes-sociais a:focus-visible {
-    outline: 2px solid var(--focus-outline-color);
-    outline-offset: 2px;
+.card-projeto.projeto-rapunzel-card a:hover {
+    background-color: rgba(255, 255, 255, 0.4); /* Fundo mais visível no hover */
+    color: #000; /* Texto preto nos links no hover */
 }
 
 
