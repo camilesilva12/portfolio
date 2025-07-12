@@ -1,182 +1,85 @@
-// --- Seletores de Elementos do DOM ---
-const menuLinks = document.querySelectorAll('.menu a');
+const themeToggleBtn = document.getElementById('theme-toggle');
+const body = document.body;
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const mainNav = document.querySelector('.main-nav');
+const navLinks = document.querySelectorAll('.main-nav .menu a');
 const sections = document.querySelectorAll('.secao');
-const backToTopBtn = document.getElementById('btn-voltar-topo');
-const hamburgerButton = document.querySelector('.hamburger-menu');
-const mainNavigation = document.querySelector('.main-nav');
-const navbar = document.querySelector('.navbar');
-const themeToggleBtn = document.getElementById('theme-toggle'); // Novo: Seleciona o botão de alternar tema
-const body = document.body; // Novo: Referência direta ao body
+const btnVoltarTopo = document.getElementById('btn-voltar-topo');
 
-// --- Variáveis de Configuração ---
-const SCROLL_OFFSET = 200;
-const SCROLL_DURATION_DELAY = 300;
-const THEME_STORAGE_KEY = 'theme-preference'; // Chave para salvar a preferência no localStorage
-
-// --- Funções Auxiliares ---
-
-/**
- * Ativa a seção correspondente e o link de menu na navegação.
- * Remove classes 'ativa' e 'active' de todos os elementos e as aplica ao elemento correto.
- * @param {string} sectionId - O ID da seção a ser ativada (ex: 'sobre', 'projetos').
- */
-function activateSectionAndNavLink(sectionId) {
-    sections.forEach(section => section.classList.remove('ativa'));
-    menuLinks.forEach(link => link.classList.remove('active'));
-
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add('ativa');
-    }
-
-    const targetNavLink = document.querySelector(`.menu a[href="#${sectionId}"]`);
-    if (targetNavLink) {
-        targetNavLink.classList.add('active');
-    }
-}
-
-/**
- * Fecha o menu hambúrguer e atualiza atributos de acessibilidade (ARIA).
- */
-function closeHamburgerMenu() {
-    mainNavigation.classList.remove('active');
-    hamburgerButton.classList.remove('active');
-    hamburgerButton.setAttribute('aria-expanded', 'false');
-    mainNavigation.setAttribute('aria-hidden', 'true');
-}
-
-/**
- * Abre o menu hambúrguer e atualiza atributos de acessibilidade (ARIA).
- */
-function openHamburgerMenu() {
-    mainNavigation.classList.add('active');
-    hamburgerButton.classList.add('active');
-    hamburgerButton.setAttribute('aria-expanded', 'true');
-    mainNavigation.setAttribute('aria-hidden', 'false');
-}
-
-/**
- * Alterna o estado do menu hambúrguer (abrir/fechar) e gerencia a acessibilidade.
- */
-function toggleHamburgerMenu() {
-    const isExpanded = hamburgerButton.getAttribute('aria-expanded') === 'true';
-    if (isExpanded) {
-        closeHamburgerMenu();
+// Carrega a preferência de tema do localStorage ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        body.classList.add(savedTheme);
     } else {
-        openHamburgerMenu();
-    }
-}
-
-/**
- * Aplica o tema especificado ('light' ou 'dark') e salva a preferência.
- * @param {string} theme - 'light' para tema claro, 'dark' para tema escuro.
- */
-function applyTheme(theme) {
-    if (theme === 'dark') {
-        body.classList.remove('light-mode');
-        body.classList.add('dark-mode');
-        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>'; // Ícone de sol para tema escuro
-        themeToggleBtn.setAttribute('aria-label', 'Alternar para tema claro');
-    } else {
-        body.classList.remove('dark-mode');
+        // Padrão para light-mode se nenhuma preferência for salva
         body.classList.add('light-mode');
-        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>'; // Ícone de lua para tema claro
-        themeToggleBtn.setAttribute('aria-label', 'Alternar para tema escuro');
     }
-    localStorage.setItem(THEME_STORAGE_KEY, theme); // Salva a preferência
-}
+    // O ícone do botão de tema NÃO é mais alterado aqui, ele permanece como definido no HTML (lua)
+});
 
-/**
- * Alterna entre o tema claro e escuro.
- */
-function toggleTheme() {
-    const currentTheme = body.classList.contains('light-mode') ? 'light' : 'dark';
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    applyTheme(newTheme);
-}
+// Alterna o tema ao clicar no botão
+themeToggleBtn.addEventListener('click', () => {
+    if (body.classList.contains('light-mode')) {
+        body.classList.replace('light-mode', 'dark-mode');
+        localStorage.setItem('theme', 'dark-mode');
+    } else {
+        body.classList.replace('dark-mode', 'light-mode');
+        localStorage.setItem('theme', 'light-mode');
+    }
+    // O ícone do botão de tema NÃO é mais alterado aqui
+});
 
+// Alternar menu hamburguer
+hamburgerMenu.addEventListener('click', () => {
+    mainNav.classList.toggle('active');
+    hamburgerMenu.classList.toggle('active');
+    // Adiciona ou remove overflow-hidden no body para evitar scroll quando o menu está aberto
+    body.classList.toggle('menu-open');
+});
 
-// --- Event Listeners ---
-
-// 1. Navegação pelo Menu (Scroll Suave e Ativação de Seção)
-menuLinks.forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-
-        const targetId = link.getAttribute('href').substring(1);
-        const targetSection = document.getElementById(targetId);
-
-        if (targetSection) {
-            const navbarHeight = navbar ? navbar.offsetHeight : 0;
-            
-            window.scrollTo({
-                top: targetSection.offsetTop - navbarHeight,
-                behavior: 'smooth'
-            });
-
-            setTimeout(() => {
-                activateSectionAndNavLink(targetId);
-            }, SCROLL_DURATION_DELAY);
-
-            closeHamburgerMenu();
+// Fecha o menu ao clicar em um link de navegação (para mobile)
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (mainNav.classList.contains('active')) {
+            mainNav.classList.remove('active');
+            hamburgerMenu.classList.remove('active');
+            body.classList.remove('menu-open');
         }
     });
 });
 
-// 2. Lógica para o Botão "Voltar ao Topo"
-backToTopBtn.addEventListener('click', () => {
+// Funcionalidade do botão "Voltar ao topo"
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) { // Mostra o botão após rolar 300px
+        btnVoltarTopo.classList.add('show');
+    } else {
+        btnVoltarTopo.classList.remove('show');
+    }
+});
+
+btnVoltarTopo.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     });
 });
 
-// 3. Detecção de Rolagem (Scroll Handler Principal)
+// Link ativo na rolagem
 window.addEventListener('scroll', () => {
-    if (window.scrollY > SCROLL_OFFSET) {
-        backToTopBtn.classList.add('show');
-    } else {
-        backToTopBtn.classList.remove('show');
-    }
-
-    const navbarHeight = navbar ? navbar.offsetHeight : 0;
-    let currentActiveSectionId = 'sobre';
-
+    let current = '';
     sections.forEach(section => {
-        const sectionTop = section.offsetTop - navbarHeight - 1;
-        const sectionBottom = sectionTop + section.offsetHeight;
-
-        if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-            currentActiveSectionId = section.id;
+        const sectionTop = section.offsetTop - 100; // Ajusta o offset para o cabeçalho
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
         }
     });
 
-    activateSectionAndNavLink(currentActiveSectionId);
-});
-
-// 4. Lógica do Menu Hambúrguer (Mobile)
-hamburgerButton.addEventListener('click', toggleHamburgerMenu);
-
-// 5. Lógica do Botão de Alternar Tema (Dark/Light Mode)
-themeToggleBtn.addEventListener('click', toggleTheme);
-
-// --- Inicialização da Página ---
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Tenta carregar a preferência de tema do localStorage
-    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-    if (savedTheme) {
-        applyTheme(savedTheme); // Aplica o tema salvo
-    } else {
-        // Se não houver preferência salva, verifica a preferência do sistema operacional
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            applyTheme('dark'); // Se o sistema estiver em modo escuro, aplica dark mode
-        } else {
-            applyTheme('light'); // Caso contrário, aplica light mode (ou o padrão do HTML)
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.href.includes(current)) {
+            link.classList.add('active');
         }
-    }
-
-    // Garante que o menu hambúrguer esteja fechado e com ARIA correto
-    closeHamburgerMenu();
-    // Ativa a seção "Sobre" e seu link de menu ao carregar a página
-    activateSectionAndNavLink('sobre');
+    });
 });
